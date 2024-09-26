@@ -2,6 +2,10 @@
 
 {% block content %}
     <h2>Discos Disponibles</h2>
+    <form method="get" action="{% url 'search_records' %}">
+        <input type="text" name="q" placeholder="Buscar discos..." value="{{ query|default:'' }}">
+        <button type="submit">Buscar</button>
+    </form>
     <div class="records-container">
         {% for record in records %}
             <div class="record">

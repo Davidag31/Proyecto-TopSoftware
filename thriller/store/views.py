@@ -6,6 +6,7 @@ from .forms import RecordForm, CustomUserCreationForm
 from django.contrib.auth import login
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages 
+from django.db.models import Q  
 
 def record_list(request):
     records = Record.objects.all()
@@ -14,6 +15,15 @@ def record_list(request):
 def record_detail(request, record_id):
     record = get_object_or_404(Record, pk=record_id)
     return render(request, 'store/record_detail.html', {'record': record})
+
+def search_records(request):
+    query = request.GET.get('q')  # Obtiene el término de búsqueda de la query
+    records = Record.objects.all()  # Obtiene todos los registros por defecto
+
+    if query:  # Si hay un término de búsqueda
+        records = records.filter(Q(title__icontains=query) | Q(artist__icontains=query))  # Filtra los registros
+
+    return render(request, 'store/record_list.html', {'records': records, 'query': query})
 
 @login_required
 def profile_view(request):
