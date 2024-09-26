@@ -2,10 +2,21 @@
 
 {% block content %}
     <h2>Discos Disponibles</h2>
-    <form method="get" action="{% url 'search_records' %}">
-        <input type="text" name="q" placeholder="Buscar discos..." value="{{ query|default:'' }}">
+
+    <!-- Formulario de búsqueda -->
+    <form method="GET" action="{% url 'record_list' %}">
+        <input type="text" name="q" value="{{ search_query }}" placeholder="Buscar discos...">
         <button type="submit">Buscar</button>
     </form>
+
+    <div>
+        <strong>Ordenar por:</strong>
+        <a href="?sort=title&order={{ order_directions.title }}&q={{ search_query }}">Título</a> |
+        <a href="?sort=artist&order={{ order_directions.artist }}&q={{ search_query }}">Artista</a> |
+        <a href="?sort=genre&order={{ order_directions.genre }}&q={{ search_query }}">Género</a> |
+        <a href="?sort=price&order={{ order_directions.price }}&q={{ search_query }}">Precio</a>
+    </div>
+
     <div class="records-container">
         {% for record in records %}
             <div class="record">
@@ -19,6 +30,8 @@
                     <img src="{{ record.image.url }}" alt="{{ record.title }}">
                 {% endif %}
             </div>
+        {% empty %}
+            <p>No se encontraron discos que coincidan con tu búsqueda.</p>
         {% endfor %}
     </div>
 {% endblock %}

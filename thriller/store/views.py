@@ -9,8 +9,39 @@ from django.contrib import messages
 from django.db.models import Q  
 
 def record_list(request):
+    sort_by = request.GET.get('sort', 'title')  # Valor por defecto para ordenar
+    order = request.GET.get('order', 'asc')  # Valor por defecto para orden ascendente
+    search_query = request.GET.get('q', '')  # Obtener la búsqueda
+
+    if order == 'desc':
+        sort_by = '-' + sort_by  # Añade un guion para orden descendente
+
+    # Filtrar los registros según la búsqueda
     records = Record.objects.all()
-    return render(request, 'store/record_list.html', {'records': records})
+
+    if search_query:
+        records = records.filter(
+            Q(title__icontains=search_query) |
+            Q(artist__icontains=search_query) |
+            Q(genre__icontains=search_query)
+        )
+
+    records = records.order_by(sort_by)
+
+    # Determinar la dirección del orden
+    order_directions = {
+        'title': 'asc' if sort_by != 'title' else 'desc',
+        'artist': 'asc' if sort_by != 'artist' else 'desc',
+        'genre': 'asc' if sort_by != 'genre' else 'desc',
+        'price': 'asc' if sort_by != 'price' else 'desc',
+    }
+
+    return render(request, 'store/record_list.html', {
+        'records': records, 
+        'sort_by': sort_by, 
+        'order_directions': order_directions,
+        'search_query': search_query  
+    })
 
 def record_detail(request, record_id):
     record = get_object_or_404(Record, pk=record_id)
