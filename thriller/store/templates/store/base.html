@@ -15,8 +15,11 @@
                 <ul>
                     <li><a href="{% url 'record_list' %}">Inicio</a></li>
                     {% if user.is_authenticated %}
-                    <li><a href="{% url 'profile' %}">Perfil</a></li> 
-                        <form id="logout-form" action="{% url 'logout' %}" method="POST">
+                        {% if user.is_staff %}  <!-- Verifica si el usuario es admin -->
+                            <li><a href="{% url 'create_record' %}">Crear Disco</a></li>  <!-- Botón para crear disco -->
+                        {% endif %}
+                        <li><a href="{% url 'profile' %}">Perfil</a></li>
+                        <form id="logout-form" action="{% url 'logout' %}" method="POST" style="display: inline;">
                             {% csrf_token %}
                             <button type="submit">Cerrar Sesión</button>
                         </form>

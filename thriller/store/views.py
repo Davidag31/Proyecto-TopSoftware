@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse
 from .models import Record, ShoppingCart, CartItem, Order, UserProfile
 from .forms import RecordForm, CustomUserCreationForm
@@ -17,7 +17,7 @@ def record_detail(request, record_id):
 
 @login_required
 def profile_view(request):
-    return render(request, 'store/profile.html')  
+    return render(request, 'store/profile.html')
 
 @login_required
 def add_to_cart(request, record_id):
@@ -95,6 +95,8 @@ def mark_order_paid(request, order_id):
     
     return HttpResponse("El pedido ya fue pagado", status=400)
 
+@login_required
+@user_passes_test(lambda u: u.is_staff)  # Verifica si el usuario es un administrador
 def create_record(request):
     if request.method == 'POST':
         form = RecordForm(request.POST, request.FILES)

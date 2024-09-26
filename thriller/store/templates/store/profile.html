@@ -2,7 +2,12 @@
 
 {% block content %}
     <div class="container">
-        <h1>Perfil de Usuario</h1>
+        {% if user.is_staff %}
+            <h1>Perfil de Administrador</h1> 
+        {% else %}
+            <h1>Perfil de Usuario</h1> 
+        {% endif %}
+        
         <h2>Hola, {{ user.username }}!</h2>
         
         <div class="profile-details">
@@ -15,7 +20,5 @@
                 {% endif %}
             </ul>
         </div>
-        
-        <a href="{% url 'logout' %}">Cerrar sesión</a>
     </div>
 {% endblock %}
