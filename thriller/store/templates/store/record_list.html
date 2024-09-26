@@ -1,0 +1,20 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+    <h2>Discos Disponibles</h2>
+    <div class="records-container">
+        {% for record in records %}
+            <div class="record">
+                <a href="{% url 'record_detail' record.id %}">
+                    <h3>{{ record.title }}</h3>
+                </a>
+                <p>Autor: {{ record.artist }}</p>
+                <p>Género: {{ record.genre }}</p>
+                <p>Precio: ${{ record.price }}</p>
+                {% if record.image %}
+                    <img src="{{ record.image.url }}" alt="{{ record.title }}">
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

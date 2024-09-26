@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thriller - Tienda de Discos</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'store/styles.css' %}">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <h1>Thriller</h1>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'record_list' %}">Inicio</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'order_history' %}">Historial de Pedidos</a></li>
+                        <li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
+                    <!-- <li><a href="{% url 'cart_view' %}">Carrito</a></li> --> 
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
+                        <li><a href="{% url 'register' %}">Registrarse</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Thriller.</p>
+    </footer>
+</body>
+</html>

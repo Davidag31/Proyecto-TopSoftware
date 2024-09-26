@@ -1,0 +1,12 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+    <h2>{{ record.title }}</h2>
+    <p>Autor: {{ record.artist }}</p>
+    <p>Género: {{ record.genre }}</p>
+    <p>Precio: ${{ record.price }}</p>
+    {% if record.image %}
+        <img src="{{ record.image.url }}" alt="{{ record.title }}" style="width: 200px;">
+    {% endif %}
+    <a class="buy-button" href="{% url 'add_to_cart' record.id %}">Agregar al Carrito</a>
+{% endblock %}
