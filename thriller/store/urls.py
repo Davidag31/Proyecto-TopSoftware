@@ -11,7 +11,7 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='store/login.html'), name='login'),
     path('register/', views.register, name='register'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-
+    path('accounts/profile/', views.profile_view, name='profile'),
     path('create/', views.create_record, name='create_record'),
 ]
 

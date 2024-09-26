@@ -8,17 +8,10 @@ class RecordForm(forms.ModelForm):
         model = Record
         fields = ['title', 'artist', "genre", 'price', 'stock', 'image']  
 
-
 class CustomUserCreationForm(UserCreationForm):
-    email = forms.EmailField(required=True, help_text="Requerido. Introduce una dirección de correo válida.")
+    address = forms.CharField(max_length=255, required=True)
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username', 'email', 'password1', 'password2', 'address')
 
-    def save(self, commit=True):
-        user = super(CustomUserCreationForm, self).save(commit=False)
-        user.email = self.cleaned_data['email'] 
-        if commit:
-            user.save() 
-        return user

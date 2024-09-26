@@ -15,9 +15,11 @@
                 <ul>
                     <li><a href="{% url 'record_list' %}">Inicio</a></li>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'order_history' %}">Historial de Pedidos</a></li>
-                        <li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
-                    <!-- <li><a href="{% url 'cart_view' %}">Carrito</a></li> --> 
+                    <li><a href="{% url 'profile' %}">Perfil</a></li> 
+                        <form id="logout-form" action="{% url 'logout' %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit">Cerrar Sesión</button>
+                        </form>
                     {% else %}
                         <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
                         <li><a href="{% url 'register' %}">Registrarse</a></li>

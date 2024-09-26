@@ -1,0 +1,21 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>Perfil de Usuario</h1>
+        <h2>Hola, {{ user.username }}!</h2>
+        
+        <div class="profile-details">
+            <h3>Detalles de tu cuenta:</h3>
+            <ul>
+                <li><strong>Nombre de usuario:</strong> {{ user.username }}</li>
+                <li><strong>Correo electrónico:</strong> {{ user.email }}</li>
+                {% if user.userprofile %}
+                    <li><strong>Dirección:</strong> {{ user.userprofile.address }}</li>
+                {% endif %}
+            </ul>
+        </div>
+        
+        <a href="{% url 'logout' %}">Cerrar sesión</a>
+    </div>
+{% endblock %}

@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from .models import Record, ShoppingCart, CartItem, Order
+from .models import Record, ShoppingCart, CartItem, Order, UserProfile
 from .forms import RecordForm, CustomUserCreationForm
 from django.contrib.auth import login
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib import messages 
 
 def record_list(request):
     records = Record.objects.all()
@@ -13,6 +14,10 @@ def record_list(request):
 def record_detail(request, record_id):
     record = get_object_or_404(Record, pk=record_id)
     return render(request, 'store/record_detail.html', {'record': record})
+
+@login_required
+def profile_view(request):
+    return render(request, 'store/profile.html')  
 
 @login_required
 def add_to_cart(request, record_id):
@@ -105,9 +110,14 @@ def register(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)
+            user = form.save()  # Crea el usuario
+            # Crear el perfil de usuario
+            UserProfile.objects.create(user=user, address=form.cleaned_data['address'])
+            login(request, user)  # Inicia sesión al usuario
+            messages.success(request, "¡Registro exitoso! Bienvenido.")
             return redirect('record_list')
+        else:
+            messages.error(request, "Error en el registro. Por favor, corrige los errores.")
     else:
         form = CustomUserCreationForm()
     

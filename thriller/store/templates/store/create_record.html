@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar Nuevo Disco</title>
-</head>
-<body>
-    <h2>Agregar Nuevo Disco</h2>
-    <form method="post" enctype="multipart/form-data"> 
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Crear Disco</button>
-    </form>
-    <a href="{% url 'record_list' %}">Volver a la lista de discos</a>
-</body>
-</html>
+{% extends 'store/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h2>Agregar Nuevo Disco</h2>
+        <form method="post" enctype="multipart/form-data"> 
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Crear Disco</button>
+        </form>
+        <a href="{% url 'record_list' %}">Volver a la lista de discos</a>
+    </div>
+{% endblock %}
