@@ -9,4 +9,8 @@
     {% if record.image %}
         <img src="{{ record.image.url }}" alt="{{ record.title }}" style="width: 200px;">
     {% endif %}
+
+    {% if user.is_staff %}  
+        <a href="{% url 'edit_record' record.id %}">Editar Disco</a>
+    {% endif %}
 {% endblock %}

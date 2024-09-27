@@ -87,3 +87,19 @@ def register(request):
         form = CustomUserCreationForm()
     
     return render(request, 'store/register.html', {'form': form})
+
+@login_required
+@user_passes_test(lambda u: u.is_staff)  # Verifica si el usuario es administrador
+def edit_record(request, record_id):
+    record = get_object_or_404(Record, id=record_id)
+
+    if request.method == 'POST':
+        form = RecordForm(request.POST, request.FILES, instance=record)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "El disco ha sido actualizado correctamente.")
+            return redirect('record_detail', record_id=record.id)
+    else:
+        form = RecordForm(instance=record)
+    
+    return render(request, 'store/edit_record.html', {'form': form, 'record': record})
