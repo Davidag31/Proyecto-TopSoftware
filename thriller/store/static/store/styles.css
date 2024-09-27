@@ -69,7 +69,8 @@ main {
 .record img {
     width: 150px;
     height: 150px;
-    object-fit: cover; /* Esto asegurará que las imágenes se ajusten sin perder proporción */
+    object-fit: cover;
+    /* Esto asegurará que las imágenes se ajusten sin perder proporción */
     margin-bottom: 10px;
     border-radius: 8px;
 }
@@ -127,5 +128,81 @@ a:hover {
 @media screen and (max-width: 600px) {
     .records-container {
         grid-template-columns: 1fr;
+    }
+}
+
+.compare-button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.compare-button {
+    background: #28a745;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.compare-button:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
+.compare-container {
+    display: flex;
+    /* Cambia de grid a flex para alineación horizontal */
+    justify-content: space-between;
+    /* Espacia los elementos dentro del contenedor */
+    margin-top: 20px;
+    /* Espacio superior */
+}
+
+.compare-record {
+    flex: 1;
+    /* Permite que cada producto ocupe un espacio igual */
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 0 10px;
+    /* Espacio lateral entre productos */
+}
+
+.compare-record img {
+    width: 150px;
+    /* Asegúrate de que las imágenes tengan un tamaño constante */
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.compare-record h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.compare-record p {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Responsive */
+@media screen and (max-width: 600px) {
+    .compare-container {
+        flex-direction: column;
+        /* En pantallas pequeñas, apila los productos */
+    }
+
+    .compare-record {
+        margin: 10px 0;
+        /* Espacio entre productos apilados */
     }
 }
