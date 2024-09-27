@@ -7,6 +7,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('', views.record_list, name='record_list'),
     path('record/<int:record_id>/', views.record_detail, name='record_detail'),
+    path('filter/<str:filter_type>/<path:filter_value>/', views.record_list, name='records_by_filter'),
     path('record/<int:record_id>/edit/', views.edit_record, name='edit_record'), 
     path('search/', views.search_records, name='search_records'),  
     path('login/', auth_views.LoginView.as_view(template_name='store/login.html'), name='login'),

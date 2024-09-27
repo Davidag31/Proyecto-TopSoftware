@@ -8,40 +8,41 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages 
 from django.db.models import Q  
 
-def record_list(request):
-    sort_by = request.GET.get('sort', 'title')  
-    order = request.GET.get('order', 'asc')  
-    search_query = request.GET.get('q', '')  
-
-    if order == 'desc':
-        sort_by = '-' + sort_by  
-
+def record_list(request, filter_type=None, filter_value=None):
     records = Record.objects.all()
 
+    # Aplicar filtro basado en el tipo (artista o género)
+    if filter_type == 'artist' and filter_value:
+        records = records.filter(artist=filter_value)
+    elif filter_type == 'genre' and filter_value:
+        records = records.filter(genre=filter_value)
+
+    # Parámetro de búsqueda
+    search_query = request.GET.get('q')
     if search_query:
-        records = records.filter(
-            Q(title__icontains=search_query) |
-            Q(artist__icontains=search_query) |
-            Q(genre__icontains=search_query)
-        )
+        records = records.filter(title__icontains=search_query)
 
-    records = records.order_by(sort_by)
+    # Parámetro de ordenación
+    sort = request.GET.get('sort', 'title')  # Ordenar por título por defecto
+    order = request.GET.get('order', 'asc')
+    order_direction = '' if order == 'asc' else '-'
+    records = records.order_by(f'{order_direction}{sort}')
 
-    # Determinar la dirección del orden
+    # Dirección de ordenación para la plantilla
     order_directions = {
-        'title': 'asc' if sort_by != 'title' else 'desc',
-        'artist': 'asc' if sort_by != 'artist' else 'desc',
-        'genre': 'asc' if sort_by != 'genre' else 'desc',
-        'price': 'asc' if sort_by != 'price' else 'desc',
+        'title': 'asc' if sort == 'title' and order == 'desc' else 'desc',
+        'artist': 'asc' if sort == 'artist' and order == 'desc' else 'desc',
+        'genre': 'asc' if sort == 'genre' and order == 'desc' else 'desc',
+        'price': 'asc' if sort == 'price' and order == 'desc' else 'desc',
     }
 
-    return render(request, 'store/record_list.html', {
-        'records': records, 
-        'sort_by': sort_by, 
+    context = {
+        'records': records,
+        'search_query': search_query,
         'order_directions': order_directions,
-        'search_query': search_query  
-    })
+    }
 
+    return render(request, 'store/record_list.html', context)
 def record_detail(request, record_id):
     record = get_object_or_404(Record, pk=record_id)
     return render(request, 'store/record_detail.html', {'record': record})
@@ -89,7 +90,7 @@ def register(request):
     return render(request, 'store/register.html', {'form': form})
 
 @login_required
-@user_passes_test(lambda u: u.is_staff)  # Verifica si el usuario es administrador
+@user_passes_test(lambda u: u.is_staff)  
 def edit_record(request, record_id):
     record = get_object_or_404(Record, id=record_id)
 
@@ -103,3 +104,17 @@ def edit_record(request, record_id):
         form = RecordForm(instance=record)
     
     return render(request, 'store/edit_record.html', {'form': form, 'record': record})
+
+def records_by_filter(request, filter_type, filter_value):
+    if filter_type == 'artist':
+        records = Record.objects.filter(artist=filter_value)
+    elif filter_type == 'genre':
+        records = Record.objects.filter(genre=filter_value)
+    else:
+        records = Record.objects.all()
+
+    return render(request, 'store/record_list.html', {
+        'records': records,
+        'filter_type': filter_type,
+        'filter_value': filter_value,
+    })

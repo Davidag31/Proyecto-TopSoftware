@@ -1,0 +1,23 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+    <h2>Discos por {{ filter_type }}: {{ filter_value }}</h2>
+
+    <div class="records-container">
+        {% for record in records %}
+            <div class="record">
+                <a href="{% url 'record_detail' record.id %}">
+                    <h3>{{ record.title }}</h3>
+                </a>
+                <p>Autor: {{ record.artist }}</p>
+                <p>Género: {{ record.genre }}</p>
+                <p>Precio: ${{ record.price }}</p>
+                {% if record.image %}
+                    <img src="{{ record.image.url }}" alt="{{ record.title }}">
+                {% endif %}
+            </div>
+        {% empty %}
+            <p>No se encontraron discos para este {{ filter_type }}.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

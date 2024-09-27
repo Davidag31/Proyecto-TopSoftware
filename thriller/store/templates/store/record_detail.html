@@ -2,8 +2,8 @@
 
 {% block content %}
     <h2>{{ record.title }}</h2>
-    <p>Autor: {{ record.artist }}</p>
-    <p>Género: {{ record.genre }}</p>
+    <p>Autor: <a href="{% url 'records_by_filter' filter_type='artist' filter_value=record.artist %}">{{ record.artist }}</a></p>
+    <p>Género: <a href="{% url 'records_by_filter' filter_type='genre' filter_value=record.genre %}">{{ record.genre }}</a></p>
     <p>Precio: ${{ record.price }}</p>
     <p>Stock: {{ record.stock }}</p>  
     {% if record.image %}
