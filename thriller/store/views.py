@@ -13,29 +13,24 @@ from django.db.models import Q
 def record_list(request, filter_type=None, filter_value=None):
     records = Record.objects.all()
 
-    # Aplicar filtro basado en el tipo (artista o género)
     if filter_type == 'artist' and filter_value:
         records = records.filter(artist=filter_value)
     elif filter_type == 'genre' and filter_value:
         records = records.filter(genre=filter_value)
 
-    # Parámetro de búsqueda
     search_query = request.GET.get('q')
     if search_query:
-        # Búsqueda en título, artista y género
         records = records.filter(
             Q(title__icontains=search_query) |
             Q(artist__icontains=search_query) |
             Q(genre__icontains=search_query)
         )
 
-    # Parámetro de ordenación
-    sort = request.GET.get('sort', 'title')  # Ordenar por título por defecto
+    sort = request.GET.get('sort', 'title')  
     order = request.GET.get('order', 'asc')
     order_direction = '' if order == 'asc' else '-'
     records = records.order_by(f'{order_direction}{sort}')
 
-    # Dirección de ordenación para la plantilla
     order_directions = {
         'title': 'asc' if sort == 'title' and order == 'desc' else 'desc',
         'artist': 'asc' if sort == 'artist' and order == 'desc' else 'desc',
