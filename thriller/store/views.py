@@ -8,6 +8,8 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages 
 from django.db.models import Q  
 
+from django.db.models import Q
+
 def record_list(request, filter_type=None, filter_value=None):
     records = Record.objects.all()
 
@@ -20,7 +22,12 @@ def record_list(request, filter_type=None, filter_value=None):
     # Parámetro de búsqueda
     search_query = request.GET.get('q')
     if search_query:
-        records = records.filter(title__icontains=search_query)
+        # Búsqueda en título, artista y género
+        records = records.filter(
+            Q(title__icontains=search_query) |
+            Q(artist__icontains=search_query) |
+            Q(genre__icontains=search_query)
+        )
 
     # Parámetro de ordenación
     sort = request.GET.get('sort', 'title')  # Ordenar por título por defecto
@@ -43,6 +50,7 @@ def record_list(request, filter_type=None, filter_value=None):
     }
 
     return render(request, 'store/record_list.html', context)
+
 def record_detail(request, record_id):
     record = get_object_or_404(Record, pk=record_id)
     return render(request, 'store/record_detail.html', {'record': record})

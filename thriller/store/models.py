@@ -7,7 +7,7 @@ class Record(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock = models.PositiveIntegerField()
     image = models.ImageField(upload_to='record_images/', blank=True, null=True)  
-    genre = models.CharField(max_length=100, default="Na")    
+    genre = models.CharField(max_length=100, default="N/A")    
     
     def __str__(self):
         return f"{self.title} by {self.artist}"
