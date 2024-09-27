@@ -1,38 +1,82 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Discos Disponibles</h2>
-
-    <!-- Formulario de búsqueda -->
-    <form method="GET" action="{% url 'record_list' %}">
-        <input type="text" name="q" value="{{ search_query }}" placeholder="Buscar discos...">
-        <button type="submit">Buscar</button>
-    </form>
-
-    <div>
-        <strong>Ordenar por:</strong>
-        <a href="?sort=title&order={{ order_directions.title }}&q={{ search_query }}">Título</a> |
-        <a href="?sort=artist&order={{ order_directions.artist }}&q={{ search_query }}">Artista</a> |
-        <a href="?sort=genre&order={{ order_directions.genre }}&q={{ search_query }}">Género</a> |
-        <a href="?sort=price&order={{ order_directions.price }}&q={{ search_query }}">Precio</a>
+<div class="navbar">
+    <h1>Discos Disponibles</h1>
+    <div class="compare-button-container">
+        <button id="compare-button" class="compare-button" disabled>
+            Comparar (<span id="compare-count">0</span>/2)
+        </button>
     </div>
+</div>
 
-    <div class="records-container">
-        {% for record in records %}
-            <div class="record">
-                <a href="{% url 'record_detail' record.id %}">
-                    <h3>{{ record.title }}</h3>
-                </a>
-                <p>Autor: <a href="{% url 'records_by_filter' filter_type='artist' filter_value=record.artist %}">{{ record.artist }}</a></p>
-                <p>Género: <a href="{% url 'records_by_filter' filter_type='genre' filter_value=record.genre %}">{{ record.genre }}</a>
-                </p>
-                <p>Precio: ${{ record.price }}</p>
-                {% if record.image %}
-                    <img src="{{ record.image.url }}" alt="{{ record.title }}">
-                {% endif %}
-            </div>
-        {% empty %}
-            <p>No se encontraron discos que coincidan con tu búsqueda.</p>
-        {% endfor %}
+<!-- Formulario de búsqueda -->
+<form method="GET" action="{% url 'record_list' %}">
+    <input type="text" name="q" value="{{ search_query }}" placeholder="Buscar discos...">
+    <button type="submit">Buscar</button>
+</form>
+
+<div>
+    <strong>Ordenar por:</strong>
+    <a href="?sort=title&order={{ order_directions.title }}&q={{ search_query }}">Título</a> |
+    <a href="?sort=artist&order={{ order_directions.artist }}&q={{ search_query }}">Artista</a> |
+    <a href="?sort=genre&order={{ order_directions.genre }}&q={{ search_query }}">Género</a> |
+    <a href="?sort=price&order={{ order_directions.price }}&q={{ search_query }}">Precio</a>
+</div>
+
+<div class="records-container">
+    {% for record in records %}
+    <div class="record">
+        <input type="checkbox" class="compare-checkbox" data-id="{{ record.id }}" />
+        <a href="{% url 'record_detail' record.id %}">
+            <h3>{{ record.title }}</h3>
+        </a>
+        <p>Autor: {{ record.artist }}</p>
+        <p>Género: {{ record.genre }}</p>
+        <p>Precio: ${{ record.price }}</p>
+        {% if record.image %}
+        <img src="{{ record.image.url }}" alt="{{ record.title }}">
+        {% endif %}
     </div>
+    {% empty %}
+    <p>No se encontraron discos que coincidan con tu búsqueda.</p>
+    {% endfor %}
+</div>
+
+<script>
+    // JavaScript para manejar la selección de productos
+    const compareCheckboxes = document.querySelectorAll('.compare-checkbox');
+    const compareButton = document.getElementById('compare-button');
+    const compareCount = document.getElementById('compare-count');
+
+    compareCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            const checkedCount = document.querySelectorAll('.compare-checkbox:checked').length;
+            compareCount.textContent = checkedCount;
+            compareButton.disabled = checkedCount === 0;
+
+            // Limitar la selección a 2
+            compareCheckboxes.forEach(box => {
+                if (checkedCount >= 2 && !box.checked) {
+                    box.disabled = true;
+                } else {
+                    box.disabled = false;
+                }
+            });
+        });
+    });
+
+    compareButton.addEventListener('click', () => {
+        const selectedIds = Array.from(compareCheckboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.dataset.id);
+
+        if (selectedIds.length === 2) {
+            const url = '{% url "compare_records" %}?ids=' + selectedIds.join(',');
+            window.location.href = url;
+        } else {
+            alert('Por favor selecciona exactamente 2 productos para comparar.');
+        }
+    });
+</script>
 {% endblock %}

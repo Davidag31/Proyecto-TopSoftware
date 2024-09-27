@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Comparar Discos</h2>
+
+<div class="compare-container">
+    {% for record in records %}
+    <div class="compare-record">
+        <h3>{{ record.title }}</h3>
+        <p>Autor: {{ record.artist }}</p>
+        <p>Género: {{ record.genre }}</p>
+        <p>Precio: ${{ record.price }}</p>
+        {% if record.image %}
+        <img src="{{ record.image.url }}" alt="{{ record.title }}">
+        {% endif %}
+    </div>
+    {% empty %}
+    <p>No hay discos seleccionados para comparar.</p>
+    {% endfor %}
+</div>
+
+{% if records|length < 2 %} <p>Selecciona 2 discos para comparar.</p>
+    {% endif %}
+    {% endblock %}
