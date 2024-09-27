@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse
-from .models import Record, ShoppingCart, CartItem, Order, UserProfile, PriceHistory
-from .forms import RecordForm, CustomUserCreationForm
+from .models import Record, ShoppingCart, CartItem, Order, UserProfile, PriceHistory, Review 
+from .forms import RecordForm, CustomUserCreationForm, ReviewForm
 from django.contrib.auth import login
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
@@ -77,13 +77,28 @@ def price_history_graph(record):
 
 
 def record_detail(request, record_id):
-    record = get_object_or_404(Record, pk=record_id)
-    price_history_record = price_history_graph(record)
-    return render(
-        request,
-        "store/record_detail.html",
-        {"record": record, "graph": price_history_record},
-    )
+    record = get_object_or_404(Record, id=record_id)
+    graph = price_history_graph(record)
+    reviews = Review.objects.filter(record=record)
+
+    if request.method == "POST":
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user = request.user
+            review.record = record
+            review.save()
+            record.update_average_rating()
+            return redirect('record_detail', record_id=record.id)
+    else:
+        form = ReviewForm()
+
+    return render(request, 'store/record_detail.html', {
+        'record': record,
+        'graph': graph,
+        'reviews': reviews,
+        'form': form
+    })
 
 
 def search_records(request):
@@ -187,3 +202,34 @@ def compare_records(request):
         records = records[:2]
 
     return render(request, "store/compare_records.html", {"records": records})
+
+
+def add_to_cart(request, product_id):
+    product = get_object_or_404(Record, id=product_id) 
+    cart, created = ShoppingCart.objects.get_or_create(user=request.user)  
+    
+    
+    cart_item, created = CartItem.objects.get_or_create(cart=cart, record=product)
+    
+    if not created:
+        
+        cart_item.quantity += 1
+    cart_item.save() 
+
+    return redirect('cart_view') 
+
+
+def cart_view(request):
+    cart, created = ShoppingCart.objects.get_or_create(user=request.user)  
+    return render(request, 'store/cart.html', {'cart': cart})
+
+
+def clear_cart(request):
+    cart = ShoppingCart.objects.get(user=request.user)
+    cart.cartitem_set.all().delete()  
+    return redirect('cart_view')  
+
+def remove_from_cart(request, item_id):
+    cart_item = get_object_or_404(CartItem, id=item_id)
+    cart_item.delete()  
+    return redirect('cart_view')

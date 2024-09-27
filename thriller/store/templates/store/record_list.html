@@ -27,22 +27,33 @@
 <div class="records-container">
     {% for record in records %}
     <div class="record">
+        <!-- Opción de comparar -->
         <input type="checkbox" class="compare-checkbox" data-id="{{ record.id }}" />
+        
+        <!-- Información del disco -->
         <a href="{% url 'record_detail' record.id %}">
             <h3>{{ record.title }}</h3>
         </a>
         <p>Autor: <a href="{% url 'records_by_filter' filter_type='artist' filter_value=record.artist %}">{{ record.artist }}</a></p>
-        <p>Género: <a href="{% url 'records_by_filter' filter_type='genre' filter_value=record.genre %}">{{ record.genre }}</a>
+        <p>Género: <a href="{% url 'records_by_filter' filter_type='genre' filter_value=record.genre %}">{{ record.genre }}</a></p>
         <p>Precio: ${{ record.price }}</p>
+        
         {% if record.image %}
         <img src="{{ record.image.url }}" alt="{{ record.title }}">
         {% endif %}
+
+        <!-- Botón para agregar al carrito -->
+        <form method="POST" action="{% url 'add_to_cart' record.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Agregar al carrito</button>
+        </form>
     </div>
     {% empty %}
     <p>No se encontraron discos que coincidan con tu búsqueda.</p>
     {% endfor %}
 </div>
 
+<!-- Script para manejar la comparación -->
 <script>
     // JavaScript para manejar la selección de productos
     const compareCheckboxes = document.querySelectorAll('.compare-checkbox');

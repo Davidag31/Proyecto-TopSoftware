@@ -1,6 +1,9 @@
 from django.contrib.auth.models import User
 from django.db import models
-
+import matplotlib.pyplot as plt 
+import io
+import base64
+from django.db.models import Avg
 
 class Record(models.Model):
     title = models.CharField(max_length=100)
@@ -9,20 +12,45 @@ class Record(models.Model):
     stock = models.PositiveIntegerField()
     image = models.ImageField(upload_to="record_images/", blank=True, null=True)
     genre = models.CharField(max_length=100, default="N/A")
+    
+    average_rating = models.DecimalField(max_digits=3, decimal_places=2, default=0.0)
+
+    def update_average_rating(self):
+        """Calcula la calificación promedio basada en las opiniones"""
+        average = self.review_set.aggregate(Avg('rating'))['rating__avg']
+        self.average_rating = average if average is not None else 0
+        self.save()
 
     def __str__(self):
         return f"{self.title} by {self.artist}"
+    
 
+from django.db import models
+from django.contrib.auth.models import User
 
-class PriceHistory(models.Model):
-    record = models.ForeignKey(
-        Record, on_delete=models.CASCADE, related_name="price_history"
-    )
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    date = models.DateField()
+class Review(models.Model):
+    record = models.ForeignKey(Record, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.PositiveIntegerField(choices=[(i, i) for i in range(1, 6)])  # Rating de 1 a 5
+    comment = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['record', 'user'], name='unique_review')
+        ]
 
     def __str__(self):
-        return f"{self.record.title} - {self.price} on {self.date}"
+        return f"Review for {self.record.title} by {self.user.username}"
+
+    
+class PriceHistory(models.Model):
+    record = models.ForeignKey(Record, related_name='price_history', on_delete=models.CASCADE)
+    date = models.DateField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"Price of {self.record.title} on {self.date}"
 
 
 class UserProfile(models.Model):
