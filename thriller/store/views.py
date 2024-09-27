@@ -7,9 +7,11 @@ from django.contrib.auth import login
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
 from django.db.models import Q
-import urllib, base64
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import io
+import urllib, base64
 
 
 def record_list(request, filter_type=None, filter_value=None):
