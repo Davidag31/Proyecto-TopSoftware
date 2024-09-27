@@ -5,12 +5,22 @@
     <p>Autor: <a href="{% url 'records_by_filter' filter_type='artist' filter_value=record.artist %}">{{ record.artist }}</a></p>
     <p>Género: <a href="{% url 'records_by_filter' filter_type='genre' filter_value=record.genre %}">{{ record.genre }}</a></p>
     <p>Precio: ${{ record.price }}</p>
-    <p>Stock: {{ record.stock }}</p>  
+    <p>Stock: {{ record.stock }}</p>
+
     {% if record.image %}
         <img src="{{ record.image.url }}" alt="{{ record.title }}" style="width: 200px;">
     {% endif %}
 
-    {% if user.is_staff %}  
+    {% if record.stock > 0 %}
+        <form method="POST" action="{% url 'add_to_cart' record.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Agregar al carrito</button>
+        </form>
+    {% else %}
+        <p>Este disco está agotado.</p>
+    {% endif %}
+
+    {% if user.is_staff %}
         <a href="{% url 'edit_record' record.id %}">Editar Disco</a>
     {% endif %}
 {% endblock %}

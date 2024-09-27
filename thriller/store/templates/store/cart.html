@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+
+{% if alert_message %}
+<div class="alert alert-warning" role="alert">
+  {{ alert_message }}
+</div>
+{% endif %}
+
+<h1>{% trans "Shopping cart" %}</h1>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>{% trans "Name" %}</th>
+        <th>{% trans "Quantity" %}</th>
+        <th>{% trans "Price" %}</th>
+        <th>{% trans "Total" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart.cartitem_set.all %}
+      <tr>
+        <td>{{ item.record.title }}</td>  
+        <td>{{ item.quantity }}</td>     
+        <td>${{ item.record.price }}</td> 
+        <td>${{ item.total_price }}</td>  
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+<p><strong>{% trans "Total price:" %} ${{ cart.total_price }}</strong></p>
+
+
+
+
+<form method="post" action="{% url 'clear_cart' %}">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">{% trans "Clear cart" %}</button>
+</form>
+
+{% endblock %}
+

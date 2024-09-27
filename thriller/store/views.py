@@ -121,3 +121,33 @@ def records_by_filter(request, filter_type, filter_value):
         'filter_type': filter_type,
         'filter_value': filter_value,
     })
+
+def add_to_cart(request, product_id):
+    product = get_object_or_404(Record, id=product_id) 
+    cart, created = ShoppingCart.objects.get_or_create(user=request.user)  
+    
+    
+    cart_item, created = CartItem.objects.get_or_create(cart=cart, record=product)
+    
+    if not created:
+        
+        cart_item.quantity += 1
+    cart_item.save() 
+
+    return redirect('cart_view') 
+
+
+def cart_view(request):
+    cart, created = ShoppingCart.objects.get_or_create(user=request.user)  
+    return render(request, 'store/cart.html', {'cart': cart})
+
+
+def clear_cart(request):
+    cart = ShoppingCart.objects.get(user=request.user)
+    cart.cartitem_set.all().delete()  
+    return redirect('cart_view')  
+
+def remove_from_cart(request, item_id):
+    cart_item = get_object_or_404(CartItem, id=item_id)
+    cart_item.delete()  
+    return redirect('cart_view')

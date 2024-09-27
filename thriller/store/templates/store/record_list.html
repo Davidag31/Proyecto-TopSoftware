@@ -24,15 +24,23 @@
                     <h3>{{ record.title }}</h3>
                 </a>
                 <p>Autor: <a href="{% url 'records_by_filter' filter_type='artist' filter_value=record.artist %}">{{ record.artist }}</a></p>
-                <p>Género: <a href="{% url 'records_by_filter' filter_type='genre' filter_value=record.genre %}">{{ record.genre }}</a>
-                </p>
+                <p>Género: <a href="{% url 'records_by_filter' filter_type='genre' filter_value=record.genre %}">{{ record.genre }}</a></p>
                 <p>Precio: ${{ record.price }}</p>
+
+                
                 {% if record.image %}
                     <img src="{{ record.image.url }}" alt="{{ record.title }}">
                 {% endif %}
+
+                
+                <form method="POST" action="{% url 'add_to_cart' record.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Agregar al carrito</button>
+                </form>
             </div>
         {% empty %}
             <p>No se encontraron discos que coincidan con tu búsqueda.</p>
         {% endfor %}
     </div>
 {% endblock %}
+
