@@ -15,6 +15,31 @@ import urllib, base64
 from django.utils.translation import activate
 from django.conf import settings
 from django.utils import translation
+from .payment_processor import CheckPaymentProcessor, AccountBalancePaymentProcessor
+
+
+@login_required
+def process_payment(request, method):
+    cart = ShoppingCart.objects.get(user=request.user)
+    total_amount = sum(item.record.price * item.quantity for item in cart.cartitem_set.all())
+
+    if method == 'check':
+        processor = CheckPaymentProcessor()
+    elif method == 'balance':
+        processor = AccountBalancePaymentProcessor(request.user)
+    else:
+        return HttpResponse("Método de pago no soportado.", content_type='text/plain')
+
+    response = processor.process_payment(cart, total_amount)
+    
+    # Vaciar el carrito después de procesar el pago sin redirigir
+    clear_cart(request, redirect_to_cart=False)
+
+    return response
+
+@login_required
+def checkout(request):
+    return render(request, 'store/checkout.html')
 
 def set_language(request):
     user_language = request.GET.get('language', 'es')  # Get the language from the query, default to 'es'
@@ -145,6 +170,11 @@ def create_record(request):
     return render(request, "store/create_record.html", {"form": form})
 
 
+from django.contrib.auth import login
+from django.contrib import messages
+from .forms import CustomUserCreationForm
+from .models import UserProfile
+
 def register(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
@@ -155,9 +185,9 @@ def register(request):
             messages.success(request, "¡Registro exitoso! Bienvenido.")
             return redirect("record_list")
         else:
-            messages.error(
-                request, "Error en el registro. Por favor, corrige los errores."
-            )
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
     else:
         form = CustomUserCreationForm()
 
@@ -217,19 +247,18 @@ def compare_records(request):
     return render(request, "store/compare_records.html", {"records": records})
 
 
+@login_required
 def add_to_cart(request, product_id):
-    product = get_object_or_404(Record, id=product_id) 
-    cart, created = ShoppingCart.objects.get_or_create(user=request.user)  
-    
-    
-    cart_item, created = CartItem.objects.get_or_create(cart=cart, record=product)
-    
-    if not created:
-        
-        cart_item.quantity += 1
-    cart_item.save() 
+    product = get_object_or_404(Record, id=product_id)
+    cart, created = ShoppingCart.objects.get_or_create(user=request.user)
 
-    return redirect('cart_view') 
+    cart_item, created = CartItem.objects.get_or_create(cart=cart, record=product)
+
+    if not created:
+        cart_item.quantity += 1
+    cart_item.save()
+
+    return redirect('cart_view')
 
 
 def cart_view(request):
@@ -237,10 +266,11 @@ def cart_view(request):
     return render(request, 'store/cart.html', {'cart': cart})
 
 
-def clear_cart(request):
+def clear_cart(request, redirect_to_cart=True):
     cart = ShoppingCart.objects.get(user=request.user)
-    cart.cartitem_set.all().delete()  
-    return redirect('cart_view')  
+    cart.cartitem_set.all().delete()
+    if redirect_to_cart:
+        return redirect('cart_view')
 
 def remove_from_cart(request, item_id):
     cart_item = get_object_or_404(CartItem, id=item_id)

@@ -39,4 +39,17 @@
   <button type="submit" class="btn btn-danger">{% trans "Clear cart" %}</button>
 </form>
 
+<!-- Enlaces para procesar el pago -->
+<a href="{% url 'process_payment' 'check' %}" id="pay-check" onclick="processPayment(event, 'check')">Pagar con cheque</a>
+<a href="{% url 'process_payment' 'balance' %}" id="pay-balance" onclick="processPayment(event, 'balance')">Pagar con saldo</a>
+
+<script>
+function processPayment(event, method) {
+    event.preventDefault();
+    const url = event.target.href;
+    window.open(url, '_blank');
+    window.location.href = "{% url 'checkout' %}";
+}
+</script>
+
 {% endblock %}

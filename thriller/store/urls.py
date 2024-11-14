@@ -30,6 +30,10 @@ urlpatterns = [
     path('cart/remove/<int:item_id>/', views.remove_from_cart, name='remove_from_cart'),
     path('i18n/', include('django.conf.urls.i18n')),  # Add this line
     path('set_language/', views.set_language, name='set_language'),
+    path('process_payment/<str:method>/', views.process_payment, name='process_payment'),
+    path('checkout/', views.checkout, name='checkout'),
+
+
 
 
 ]

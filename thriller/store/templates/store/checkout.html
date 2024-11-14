@@ -1,0 +1,8 @@
+<!-- store/templates/store/checkout.html -->
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<h1>{% trans "Thank you for your purchase" %}</h1>
+<p>{% trans "Your payment has been successfully processed." %}</p>
+<a href="{% url 'record_list' %}">{% trans "Return to the store" %}</a>
+{% endblock %}

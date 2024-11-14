@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-14 02:08-0500\n"
+"POT-Creation-Date: 2024-11-14 18:20-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,292 +17,302 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: .\thriller\store\templates\store\cart.html:11
+
+#: .\store\templates\store\cart.html:11
 msgid "Shopping cart"
 msgstr "Carrito de compras"
 
-#: .\thriller\store\templates\store\cart.html:16
+#: .\store\templates\store\cart.html:16
 msgid "Name"
 msgstr "Name"
 
-#: .\thriller\store\templates\store\cart.html:17
+#: .\store\templates\store\cart.html:17
 msgid "Quantity"
 msgstr "Quantity"
 
-#: .\thriller\store\templates\store\cart.html:18
+#: .\store\templates\store\cart.html:18
 msgid "Price"
 msgstr "Price"
 
-#: .\thriller\store\templates\store\cart.html:19
+#: .\store\templates\store\cart.html:19
 msgid "Total"
 msgstr "Total"
 
-#: .\thriller\store\templates\store\cart.html:35
+#: .\store\templates\store\cart.html:35
 msgid "Total price:"
 msgstr "Total price"
 
-#: .\thriller\store\templates\store\cart.html:39
+#: .\store\templates\store\cart.html:39
 msgid "Clear cart"
 msgstr "Clear cart"
 
-#: .\thriller\store\templates\store\compare_records.html:5
+#: .\store\templates\store\checkout.html:5
+msgid "Thank you for your purchase"
+msgstr "Thank you for your purchase"
+
+#: .\store\templates\store\checkout.html:6
+msgid "Your payment has been successfully processed."
+msgstr "Your payment has been successfully processed"
+
+#: .\store\templates\store\checkout.html:7
+msgid "Return to the store"
+msgstr "Return to the store"
+
+#: .\store\templates\store\compare_records.html:5
 msgid "Comparar Discos"
 msgstr "Compare Records"
 
-#: .\thriller\store\templates\store\compare_records.html:11
-#: .\thriller\store\templates\store\record_detail.html:8
-#: .\thriller\store\templates\store\record_list.html:38
-#: .\thriller\store\templates\store\records_by_filter.html:13
+#: .\store\templates\store\compare_records.html:11
+#: .\store\templates\store\record_detail.html:8
+#: .\store\templates\store\record_list.html:38
+#: .\store\templates\store\records_by_filter.html:13
 msgid "Autor:"
 msgstr "Author:"
 
-#: .\thriller\store\templates\store\compare_records.html:12
-#: .\thriller\store\templates\store\record_detail.html:9
-#: .\thriller\store\templates\store\record_list.html:39
-#: .\thriller\store\templates\store\records_by_filter.html:14
+#: .\store\templates\store\compare_records.html:12
+#: .\store\templates\store\record_detail.html:9
+#: .\store\templates\store\record_list.html:39
+#: .\store\templates\store\records_by_filter.html:14
 msgid "Género:"
 msgstr "Genre:"
 
-#: .\thriller\store\templates\store\compare_records.html:13
-#: .\thriller\store\templates\store\record_detail.html:10
-#: .\thriller\store\templates\store\record_list.html:40
-#: .\thriller\store\templates\store\records_by_filter.html:15
+#: .\store\templates\store\compare_records.html:13
+#: .\store\templates\store\record_detail.html:10
+#: .\store\templates\store\record_list.html:40
+#: .\store\templates\store\records_by_filter.html:15
 msgid "Precio:"
 msgstr "Price:"
 
-#: .\thriller\store\templates\store\compare_records.html:14
-#: .\thriller\store\templates\store\record_detail.html:41
+#: .\store\templates\store\compare_records.html:14
+#: .\store\templates\store\record_detail.html:41
 msgid "Calificación promedio:"
 msgstr "Average rating:"
 
-#: .\thriller\store\templates\store\compare_records.html:19
+#: .\store\templates\store\compare_records.html:19
 msgid "Opiniones"
 msgstr "Reviews"
 
-#: .\thriller\store\templates\store\compare_records.html:23
-#: .\thriller\store\templates\store\record_detail.html:48
+#: .\store\templates\store\compare_records.html:23
+#: .\store\templates\store\record_detail.html:48
 msgid "Calificación:"
 msgstr "Rating:"
 
-#: .\thriller\store\templates\store\compare_records.html:30
+#: .\store\templates\store\compare_records.html:30
 msgid "No hay discos seleccionados para comparar."
 msgstr "No records selected for comparison."
 
-#: .\thriller\store\templates\store\compare_records.html:35
+#: .\store\templates\store\compare_records.html:35
 msgid "Selecciona 2 discos para comparar."
 msgstr "Select 2 records to compare."
 
-#: .\thriller\store\templates\store\create_record.html:6
+#: .\store\templates\store\create_record.html:6
 msgid "Agregar Nuevo Disco"
 msgstr "Add New Record"
 
-#: .\thriller\store\templates\store\create_record.html:10
-#: .\thriller\thriller\templates\base.html:55
+#: .\store\templates\store\create_record.html:10
+#: .\thriller\templates\base.html:61
 msgid "Crear Disco"
 msgstr "Create Record"
 
-#: .\thriller\store\templates\store\create_record.html:12
+#: .\store\templates\store\create_record.html:12
 msgid "Volver a la lista de discos"
 msgstr "Back to record list"
 
-#: .\thriller\store\templates\store\edit_record.html:5
+#: .\store\templates\store\edit_record.html:5
 msgid "Editar Disco:"
 msgstr "Edit Record:"
 
-#: .\thriller\store\templates\store\edit_record.html:10
+#: .\store\templates\store\edit_record.html:10
 msgid "Guardar Cambios"
 msgstr "Save Changes"
 
-#: .\thriller\store\templates\store\edit_record.html:13
+#: .\store\templates\store\edit_record.html:13
 msgid "Cancelar"
 msgstr "Cancel"
 
-#: .\thriller\store\templates\store\login.html:6
-#: .\thriller\store\templates\store\login.html:10
-#: .\thriller\thriller\templates\base.html:84
+#: .\store\templates\store\login.html:6 .\store\templates\store\login.html:10
+#: .\thriller\templates\base.html:90
 msgid "Iniciar Sesión"
 msgstr "Log In"
 
-#: .\thriller\store\templates\store\login.html:12
+#: .\store\templates\store\login.html:12
 msgid "¿No tienes una cuenta?"
 msgstr "Don't have an account?"
 
-#: .\thriller\store\templates\store\login.html:12
+#: .\store\templates\store\login.html:12
 msgid "Regístrate aquí"
 msgstr "Sign up here"
 
-#: .\thriller\store\templates\store\profile.html:7
+#: .\store\templates\store\profile.html:7
 msgid "Perfil de Administrador"
 msgstr "Admin Profile"
 
-#: .\thriller\store\templates\store\profile.html:9
+#: .\store\templates\store\profile.html:9
 msgid "Perfil de Usuario"
 msgstr "User Profile"
 
-#: .\thriller\store\templates\store\profile.html:12
+#: .\store\templates\store\profile.html:12
 msgid "Hola,"
 msgstr "Hello,"
 
-#: .\thriller\store\templates\store\profile.html:15
+#: .\store\templates\store\profile.html:15
 msgid "Detalles de tu cuenta:"
 msgstr "Your account details:"
 
-#: .\thriller\store\templates\store\profile.html:17
-#: .\thriller\store\templates\store\register.html:9
+#: .\store\templates\store\profile.html:17
+#: .\store\templates\store\register.html:9
 msgid "Nombre de usuario:"
 msgstr "Username:"
 
-#: .\thriller\store\templates\store\profile.html:18
-#: .\thriller\store\templates\store\register.html:10
+#: .\store\templates\store\profile.html:18
+#: .\store\templates\store\register.html:10
 msgid "Correo electrónico:"
 msgstr "Email:"
 
-#: .\thriller\store\templates\store\profile.html:20
-#: .\thriller\store\templates\store\register.html:13
+#: .\store\templates\store\profile.html:20
+#: .\store\templates\store\register.html:13
 msgid "Dirección:"
 msgstr "Address:"
 
-#: .\thriller\store\templates\store\record_detail.html:11
+#: .\store\templates\store\record_detail.html:11
 msgid "Stock:"
 msgstr "Stock:"
 
-#: .\thriller\store\templates\store\record_detail.html:18
-#: .\thriller\store\templates\store\record_detail.html:20
+#: .\store\templates\store\record_detail.html:18
+#: .\store\templates\store\record_detail.html:20
 msgid "Historial de Precios"
 msgstr "Price History"
 
-#: .\thriller\store\templates\store\record_detail.html:22
+#: .\store\templates\store\record_detail.html:22
 msgid "No hay datos de historial de precios disponibles."
 msgstr "No price history data available."
 
-#: .\thriller\store\templates\store\record_detail.html:29
-#: .\thriller\store\templates\store\record_list.html:49
+#: .\store\templates\store\record_detail.html:29
+#: .\store\templates\store\record_list.html:49
 msgid "Agregar al carrito"
 msgstr "Add to cart"
 
-#: .\thriller\store\templates\store\record_detail.html:32
+#: .\store\templates\store\record_detail.html:32
 msgid "Este disco está agotado."
 msgstr "This record is out of stock."
 
-#: .\thriller\store\templates\store\record_detail.html:37
+#: .\store\templates\store\record_detail.html:37
 msgid "Editar Disco"
 msgstr "Edit Record"
 
-#: .\thriller\store\templates\store\record_detail.html:43
+#: .\store\templates\store\record_detail.html:43
 msgid "Opiniones de los clientes"
 msgstr "Customer Reviews"
 
-#: .\thriller\store\templates\store\record_detail.html:50
+#: .\store\templates\store\record_detail.html:50
 msgid "Publicado el"
 msgstr "Posted on"
 
-#: .\thriller\store\templates\store\record_detail.html:53
+#: .\store\templates\store\record_detail.html:53
 msgid "No hay opiniones todavía. Sé el primero en opinar."
 msgstr "No reviews yet. Be the first to review."
 
-#: .\thriller\store\templates\store\record_detail.html:58
+#: .\store\templates\store\record_detail.html:58
 msgid "Dejar una opinión"
 msgstr "Leave a review"
 
-#: .\thriller\store\templates\store\record_detail.html:63
+#: .\store\templates\store\record_detail.html:63
 msgid "Enviar opinión"
 msgstr "Submit review"
 
-#: .\thriller\store\templates\store\record_detail.html:66
+#: .\store\templates\store\record_detail.html:66
 msgid "Debes"
 msgstr "You must"
 
-#: .\thriller\store\templates\store\record_detail.html:66
+#: .\store\templates\store\record_detail.html:66
 msgid "iniciar sesión"
 msgstr "log in"
 
-#: .\thriller\store\templates\store\record_detail.html:66
+#: .\store\templates\store\record_detail.html:66
 msgid "para dejar una opinión."
 msgstr "to leave a review."
 
-#: .\thriller\store\templates\store\record_list.html:6
+#: .\store\templates\store\record_list.html:6
 msgid "Discos Disponibles"
 msgstr "Available Records"
 
-#: .\thriller\store\templates\store\record_list.html:9
+#: .\store\templates\store\record_list.html:9
 msgid "Comparar"
 msgstr "Compare"
 
-#: .\thriller\store\templates\store\record_list.html:16
+#: .\store\templates\store\record_list.html:16
 msgid "Buscar discos..."
 msgstr "Search records..."
 
-#: .\thriller\store\templates\store\record_list.html:17
+#: .\store\templates\store\record_list.html:17
 msgid "Buscar"
 msgstr "Search"
 
-#: .\thriller\store\templates\store\record_list.html:21
+#: .\store\templates\store\record_list.html:21
 msgid "Ordenar por:"
 msgstr "Sort by:"
 
-#: .\thriller\store\templates\store\record_list.html:22
+#: .\store\templates\store\record_list.html:22
 msgid "Título"
 msgstr "Title"
 
-#: .\thriller\store\templates\store\record_list.html:23
+#: .\store\templates\store\record_list.html:23
 msgid "Artista"
 msgstr "Artist"
 
-#: .\thriller\store\templates\store\record_list.html:24
+#: .\store\templates\store\record_list.html:24
 msgid "Género"
 msgstr "Genre"
 
-#: .\thriller\store\templates\store\record_list.html:25
+#: .\store\templates\store\record_list.html:25
 msgid "Precio"
 msgstr "Price"
 
-#: .\thriller\store\templates\store\record_list.html:53
+#: .\store\templates\store\record_list.html:53
 msgid "No se encontraron discos que coincidan con tu búsqueda."
 msgstr "No records matching your search were found."
 
-#: .\thriller\store\templates\store\record_list.html:90
+#: .\store\templates\store\record_list.html:90
 msgid "Por favor selecciona exactamente 2 productos para comparar."
 msgstr "Please select exactly 2 products to compare."
 
-#: .\thriller\store\templates\store\records_by_filter.html:5
+#: .\store\templates\store\records_by_filter.html:5
 msgid "Discos por"
 msgstr "Records by"
 
-#: .\thriller\store\templates\store\records_by_filter.html:21
+#: .\store\templates\store\records_by_filter.html:21
 msgid "No se encontraron discos para este"
 msgstr "No records found for this"
 
-#: .\thriller\store\templates\store\register.html:5
-#: .\thriller\store\templates\store\register.html:14
-#: .\thriller\thriller\templates\base.html:89
+#: .\store\templates\store\register.html:5
+#: .\store\templates\store\register.html:14 .\thriller\templates\base.html:95
 msgid "Registrarse"
 msgstr "Sign Up"
 
-#: .\thriller\store\templates\store\register.html:11
+#: .\store\templates\store\register.html:11
 msgid "Contraseña:"
 msgstr "Password:"
 
-#: .\thriller\store\templates\store\register.html:12
+#: .\store\templates\store\register.html:12
 msgid "Confirmar contraseña:"
 msgstr "Confirm password:"
 
-#: .\thriller\thriller\templates\base.html:9
-#: .\thriller\thriller\templates\base.html:111
+#: .\thriller\templates\base.html:11 .\thriller\templates\base.html:117
 msgid "Thriller"
 msgstr "Thriller"
 
-#: .\thriller\thriller\templates\base.html:46
+#: .\thriller\templates\base.html:52
 msgid "Inicio"
 msgstr "Home"
 
-#: .\thriller\thriller\templates\base.html:62
+#: .\thriller\templates\base.html:68
 msgid "Perfil"
 msgstr "Profile"
 
-#: .\thriller\thriller\templates\base.html:68
+#: .\thriller\templates\base.html:74
 msgid "Carrito"
 msgstr "Cart"
 
-#: .\thriller\thriller\templates\base.html:76
+#: .\thriller\templates\base.html:82
 msgid "Cerrar Sesión"
 msgstr "Log Out"
