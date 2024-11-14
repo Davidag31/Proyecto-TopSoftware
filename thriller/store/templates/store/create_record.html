@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
     <div class="container">
-        <h2>Agregar Nuevo Disco</h2>
+        <h2>{% trans "Agregar Nuevo Disco" %}</h2>
         <form method="post" enctype="multipart/form-data"> 
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Crear Disco</button>
+            <button type="submit">{% trans "Crear Disco" %}</button>
         </form>
-        <a href="{% url 'record_list' %}">Volver a la lista de discos</a>
+        <a href="{% url 'record_list' %}">{% trans "Volver a la lista de discos" %}</a>
     </div>
 {% endblock %}

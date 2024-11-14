@@ -1,15 +1,16 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}  
-    <h2>Registrarse</h2>
+    <h2>{% trans "Registrarse" %}</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.non_field_errors }}
-        <p><label for="id_username">Nombre de usuario:</label> {{ form.username }}</p>
-        <p><label for="id_email">Correo electrónico:</label> {{ form.email }}</p>
-        <p><label for="id_password1">Contraseña:</label> {{ form.password1 }}</p>
-        <p><label for="id_password2">Confirmar contraseña:</label> {{ form.password2 }}</p>
-        <p><label for="id_address">Dirección:</label> {{ form.address }}</p> 
-        <button type="submit">Registrarse</button>
+        <p><label for="id_username">{% trans "Nombre de usuario:" %}</label> {{ form.username }}</p>
+        <p><label for="id_email">{% trans "Correo electrónico:" %}</label> {{ form.email }}</p>
+        <p><label for="id_password1">{% trans "Contraseña:" %}</label> {{ form.password1 }}</p>
+        <p><label for="id_password2">{% trans "Confirmar contraseña:" %}</label> {{ form.password2 }}</p>
+        <p><label for="id_address">{% trans "Dirección:" %}</label> {{ form.address }}</p> 
+        <button type="submit">{% trans "Registrarse" %}</button>
     </form>
 {% endblock %}

@@ -1,22 +1,23 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
     <div class="container">
         {% if user.is_staff %}
-            <h1>Perfil de Administrador</h1> 
+            <h1>{% trans "Perfil de Administrador" %}</h1> 
         {% else %}
-            <h1>Perfil de Usuario</h1> 
+            <h1>{% trans "Perfil de Usuario" %}</h1> 
         {% endif %}
         
-        <h2>Hola, {{ user.username }}!</h2>
+        <h2>{% trans "Hola," %} {{ user.username }}!</h2>
         
         <div class="profile-details">
-            <h3>Detalles de tu cuenta:</h3>
+            <h3>{% trans "Detalles de tu cuenta:" %}</h3>
             <ul>
-                <li><strong>Nombre de usuario:</strong> {{ user.username }}</li>
-                <li><strong>Correo electrónico:</strong> {{ user.email }}</li>
+                <li><strong>{% trans "Nombre de usuario:" %}</strong> {{ user.username }}</li>
+                <li><strong>{% trans "Correo electrónico:" %}</strong> {{ user.email }}</li>
                 {% if user.userprofile %}
-                    <li><strong>Dirección:</strong> {{ user.userprofile.address }}</li>
+                    <li><strong>{% trans "Dirección:" %}</strong> {{ user.userprofile.address }}</li>
                 {% endif %}
             </ul>
         </div>

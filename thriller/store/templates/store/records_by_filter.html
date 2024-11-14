@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
-    <h2>Discos por {{ filter_type }}: {{ filter_value }}</h2>
+    <h2>{% trans "Discos por" %} {{ filter_type }}: {{ filter_value }}</h2>
 
     <div class="records-container">
         {% for record in records %}
@@ -9,15 +10,15 @@
                 <a href="{% url 'record_detail' record.id %}">
                     <h3>{{ record.title }}</h3>
                 </a>
-                <p>Autor: {{ record.artist }}</p>
-                <p>Género: {{ record.genre }}</p>
-                <p>Precio: ${{ record.price }}</p>
+                <p>{% trans "Autor:" %} {{ record.artist }}</p>
+                <p>{% trans "Género:" %} {{ record.genre }}</p>
+                <p>{% trans "Precio:" %} ${{ record.price }}</p>
                 {% if record.image %}
                     <img src="{{ record.image.url }}" alt="{{ record.title }}">
                 {% endif %}
             </div>
         {% empty %}
-            <p>No se encontraron discos para este {{ filter_type }}.</p>
+            <p>{% trans "No se encontraron discos para este" %} {{ filter_type }}.</p>
         {% endfor %}
     </div>
 {% endblock %}

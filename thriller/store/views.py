@@ -12,7 +12,20 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import io
 import urllib, base64
+from django.utils.translation import activate
+from django.conf import settings
+from django.utils import translation
 
+def set_language(request):
+    user_language = request.GET.get('language', 'es')  # Get the language from the query, default to 'es'
+    translation.activate(user_language)  # Activate the language
+    request.session['language'] = user_language  # Save the language in the session
+
+    # Get the previous URL and replace the language code in the path
+    previous_url = request.META.get('HTTP_REFERER', '/')
+    new_url = previous_url.replace('/en/', f'/{user_language}/').replace('/es/', f'/{user_language}/')
+
+    return redirect(new_url)  # Redirect to the new URL with the updated language code
 
 def record_list(request, filter_type=None, filter_value=None):
     records = Record.objects.all()
@@ -233,3 +246,4 @@ def remove_from_cart(request, item_id):
     cart_item = get_object_or_404(CartItem, id=item_id)
     cart_item.delete()  
     return redirect('cart_view')
+

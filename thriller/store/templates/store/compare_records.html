@@ -1,37 +1,38 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
-<h2>Comparar Discos</h2>
+<h2>{% trans "Comparar Discos" %}</h2>
 
 <div class="compare-container">
     {% for record in records %}
     <div class="compare-record">
         <h3>{{ record.title }}</h3>
-        <p>Autor: {{ record.artist }}</p>
-        <p>Género: {{ record.genre }}</p>
-        <p>Precio: ${{ record.price }}</p>
-        <p>Calificación promedio: {{ record.average_rating }} / 5</p>
+        <p>{% trans "Autor:" %} {{ record.artist }}</p>
+        <p>{% trans "Género:" %} {{ record.genre }}</p>
+        <p>{% trans "Precio:" %} ${{ record.price }}</p>
+        <p>{% trans "Calificación promedio:" %} {{ record.average_rating }} / 5</p>
         {% if record.image %}
         <img src="{{ record.image.url }}" alt="{{ record.title }}">
         {% endif %}
 
-        <h4>Opiniones</h4>
+        <h4>{% trans "Opiniones" %}</h4>
         <ul>
             {% for review in record.review_set.all %}
             <li>
-                <strong>{{ review.user.username }}:</strong> Calificación: {{ review.rating }} / 5
+                <strong>{{ review.user.username }}:</strong> {% trans "Calificación:" %} {{ review.rating }} / 5
                 <p>{{ review.comment }}</p>
             </li>
             {% endfor %}
         </ul>
     </div>
     {% empty %}
-    <p>No hay discos seleccionados para comparar.</p>
+    <p>{% trans "No hay discos seleccionados para comparar." %}</p>
     {% endfor %}
 </div>
 
 {% if records|length < 2 %}
-<p>Selecciona 2 discos para comparar.</p>
+<p>{% trans "Selecciona 2 discos para comparar." %}</p>
 {% endif %}
 
 {% endblock %}

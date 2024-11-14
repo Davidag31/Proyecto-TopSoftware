@@ -1,27 +1,28 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 <div class="navbar">
-    <h1>Discos Disponibles</h1>
+    <h1>{% trans "Discos Disponibles" %}</h1>
     <div class="compare-button-container">
         <button id="compare-button" class="compare-button" disabled>
-            Comparar (<span id="compare-count">0</span>/2)
+            {% trans "Comparar" %} (<span id="compare-count">0</span>/2)
         </button>
     </div>
 </div>
 
 <!-- Formulario de búsqueda -->
 <form method="GET" action="{% url 'record_list' %}">
-    <input type="text" name="q" value="{{ search_query }}" placeholder="Buscar discos...">
-    <button type="submit">Buscar</button>
+    <input type="text" name="q" value="{{ search_query }}" placeholder="{% trans "Buscar discos..." %}">
+    <button type="submit">{% trans "Buscar" %}</button>
 </form>
 
 <div>
-    <strong>Ordenar por:</strong>
-    <a href="?sort=title&order={{ order_directions.title }}&q={{ search_query }}">Título</a> |
-    <a href="?sort=artist&order={{ order_directions.artist }}&q={{ search_query }}">Artista</a> |
-    <a href="?sort=genre&order={{ order_directions.genre }}&q={{ search_query }}">Género</a> |
-    <a href="?sort=price&order={{ order_directions.price }}&q={{ search_query }}">Precio</a>
+    <strong>{% trans "Ordenar por:" %}</strong>
+    <a href="?sort=title&order={{ order_directions.title }}&q={{ search_query }}">{% trans "Título" %}</a> |
+    <a href="?sort=artist&order={{ order_directions.artist }}&q={{ search_query }}">{% trans "Artista" %}</a> |
+    <a href="?sort=genre&order={{ order_directions.genre }}&q={{ search_query }}">{% trans "Género" %}</a> |
+    <a href="?sort=price&order={{ order_directions.price }}&q={{ search_query }}">{% trans "Precio" %}</a>
 </div>
 
 <div class="records-container">
@@ -34,9 +35,9 @@
         <a href="{% url 'record_detail' record.id %}">
             <h3>{{ record.title }}</h3>
         </a>
-        <p>Autor: <a href="{% url 'records_by_filter' filter_type='artist' filter_value=record.artist %}">{{ record.artist }}</a></p>
-        <p>Género: <a href="{% url 'records_by_filter' filter_type='genre' filter_value=record.genre %}">{{ record.genre }}</a></p>
-        <p>Precio: ${{ record.price }}</p>
+        <p>{% trans "Autor:" %} <a href="{% url 'records_by_filter' filter_type='artist' filter_value=record.artist %}">{{ record.artist }}</a></p>
+        <p>{% trans "Género:" %} <a href="{% url 'records_by_filter' filter_type='genre' filter_value=record.genre %}">{{ record.genre }}</a></p>
+        <p>{% trans "Precio:" %} ${{ record.price }}</p>
         
         {% if record.image %}
         <img src="{{ record.image.url }}" alt="{{ record.title }}">
@@ -45,11 +46,11 @@
         <!-- Botón para agregar al carrito -->
         <form method="POST" action="{% url 'add_to_cart' record.id %}">
             {% csrf_token %}
-            <button type="submit" class="btn btn-primary">Agregar al carrito</button>
+            <button type="submit" class="btn btn-primary">{% trans "Agregar al carrito" %}</button>
         </form>
     </div>
     {% empty %}
-    <p>No se encontraron discos que coincidan con tu búsqueda.</p>
+    <p>{% trans "No se encontraron discos que coincidan con tu búsqueda." %}</p>
     {% endfor %}
 </div>
 
@@ -86,7 +87,7 @@
             const url = '{% url "compare_records" %}?ids=' + selectedIds.join(',');
             window.location.href = url;
         } else {
-            alert('Por favor selecciona exactamente 2 productos para comparar.');
+            alert('{% trans "Por favor selecciona exactamente 2 productos para comparar." %}');
         }
     });
 </script>

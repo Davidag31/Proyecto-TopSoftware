@@ -1,0 +1,309 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-14 02:08-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
+"1 : 2;\n"
+#: .\thriller\store\templates\store\cart.html:11
+msgid "Shopping cart"
+msgstr "Carrito de compras"
+
+#: .\thriller\store\templates\store\cart.html:16
+msgid "Name"
+msgstr "Nombre"
+
+#: .\thriller\store\templates\store\cart.html:17
+msgid "Quantity"
+msgstr "Cantidad"
+
+#: .\thriller\store\templates\store\cart.html:18
+msgid "Price"
+msgstr "Precio"
+
+#: .\thriller\store\templates\store\cart.html:19
+msgid "Total"
+msgstr "Total"
+
+#: .\thriller\store\templates\store\cart.html:35
+msgid "Total price:"
+msgstr "Precio total:"
+
+#: .\thriller\store\templates\store\cart.html:39
+msgid "Clear cart"
+msgstr "Vaciar carrito"
+
+#: .\thriller\store\templates\store\compare_records.html:5
+msgid "Comparar Discos"
+msgstr "Comparar Discos"
+
+#: .\thriller\store\templates\store\compare_records.html:11
+#: .\thriller\store\templates\store\record_detail.html:8
+#: .\thriller\store\templates\store\record_list.html:38
+#: .\thriller\store\templates\store\records_by_filter.html:13
+msgid "Autor:"
+msgstr "Autor:"
+
+#: .\thriller\store\templates\store\compare_records.html:12
+#: .\thriller\store\templates\store\record_detail.html:9
+#: .\thriller\store\templates\store\record_list.html:39
+#: .\thriller\store\templates\store\records_by_filter.html:14
+msgid "Género:"
+msgstr "Género:"
+
+#: .\thriller\store\templates\store\compare_records.html:13
+#: .\thriller\store\templates\store\record_detail.html:10
+#: .\thriller\store\templates\store\record_list.html:40
+#: .\thriller\store\templates\store\records_by_filter.html:15
+msgid "Precio:"
+msgstr "Precio:"
+
+#: .\thriller\store\templates\store\compare_records.html:14
+#: .\thriller\store\templates\store\record_detail.html:41
+msgid "Calificación promedio:"
+msgstr "Calificación promedio:"
+
+#: .\thriller\store\templates\store\compare_records.html:19
+msgid "Opiniones"
+msgstr "Opiniones"
+
+#: .\thriller\store\templates\store\compare_records.html:23
+#: .\thriller\store\templates\store\record_detail.html:48
+msgid "Calificación:"
+msgstr "Calificación:"
+
+#: .\thriller\store\templates\store\compare_records.html:30
+msgid "No hay discos seleccionados para comparar."
+msgstr "No hay discos seleccionados para comparar."
+
+#: .\thriller\store\templates\store\compare_records.html:35
+msgid "Selecciona 2 discos para comparar."
+msgstr "Selecciona 2 discos para comparar."
+
+#: .\thriller\store\templates\store\create_record.html:6
+msgid "Agregar Nuevo Disco"
+msgstr "Agregar Nuevo Disco"
+
+#: .\thriller\store\templates\store\create_record.html:10
+#: .\thriller\thriller\templates\base.html:55
+msgid "Crear Disco"
+msgstr "Crear Disco"
+
+#: .\thriller\store\templates\store\create_record.html:12
+msgid "Volver a la lista de discos"
+msgstr "Volver a la lista de discos"
+
+#: .\thriller\store\templates\store\edit_record.html:5
+msgid "Editar Disco:"
+msgstr "Editar Disco:"
+
+#: .\thriller\store\templates\store\edit_record.html:10
+msgid "Guardar Cambios"
+msgstr "Guardar Cambios"
+
+#: .\thriller\store\templates\store\edit_record.html:13
+msgid "Cancelar"
+msgstr "Cancelar"
+
+#: .\thriller\store\templates\store\login.html:6
+#: .\thriller\store\templates\store\login.html:10
+#: .\thriller\thriller\templates\base.html:84
+msgid "Iniciar Sesión"
+msgstr "Iniciar Sesión"
+
+#: .\thriller\store\templates\store\login.html:12
+msgid "¿No tienes una cuenta?"
+msgstr "¿No tienes una cuenta?"
+
+#: .\thriller\store\templates\store\login.html:12
+msgid "Regístrate aquí"
+msgstr "Regístrate aquí"
+
+#: .\thriller\store\templates\store\profile.html:7
+msgid "Perfil de Administrador"
+msgstr "Perfil de Administrador"
+
+#: .\thriller\store\templates\store\profile.html:9
+msgid "Perfil de Usuario"
+msgstr "Perfil de Usuario"
+
+#: .\thriller\store\templates\store\profile.html:12
+msgid "Hola,"
+msgstr "Hola,"
+
+#: .\thriller\store\templates\store\profile.html:15
+msgid "Detalles de tu cuenta:"
+msgstr "Detalles de tu cuenta:"
+
+#: .\thriller\store\templates\store\profile.html:17
+#: .\thriller\store\templates\store\register.html:9
+msgid "Nombre de usuario:"
+msgstr "Nombre de usuario:"
+
+#: .\thriller\store\templates\store\profile.html:18
+#: .\thriller\store\templates\store\register.html:10
+msgid "Correo electrónico:"
+msgstr "Correo electrónico:"
+
+#: .\thriller\store\templates\store\profile.html:20
+#: .\thriller\store\templates\store\register.html:13
+msgid "Dirección:"
+msgstr "Dirección:"
+
+#: .\thriller\store\templates\store\record_detail.html:11
+msgid "Stock:"
+msgstr "Stock:"
+
+#: .\thriller\store\templates\store\record_detail.html:18
+#: .\thriller\store\templates\store\record_detail.html:20
+msgid "Historial de Precios"
+msgstr "Historial de Precios"
+
+#: .\thriller\store\templates\store\record_detail.html:22
+msgid "No hay datos de historial de precios disponibles."
+msgstr "No hay datos de historial de precios disponibles."
+
+#: .\thriller\store\templates\store\record_detail.html:29
+#: .\thriller\store\templates\store\record_list.html:49
+msgid "Agregar al carrito"
+msgstr "Agregar al carrito"
+
+#: .\thriller\store\templates\store\record_detail.html:32
+msgid "Este disco está agotado."
+msgstr "Este disco está agotado."
+
+#: .\thriller\store\templates\store\record_detail.html:37
+msgid "Editar Disco"
+msgstr "Editar Disco"
+
+#: .\thriller\store\templates\store\record_detail.html:43
+msgid "Opiniones de los clientes"
+msgstr "Opiniones de los clientes"
+
+#: .\thriller\store\templates\store\record_detail.html:50
+msgid "Publicado el"
+msgstr "Publicado el"
+
+#: .\thriller\store\templates\store\record_detail.html:53
+msgid "No hay opiniones todavía. Sé el primero en opinar."
+msgstr "No hay opiniones todavía. Sé el primero en opinar."
+
+#: .\thriller\store\templates\store\record_detail.html:58
+msgid "Dejar una opinión"
+msgstr "Dejar una opinión"
+
+#: .\thriller\store\templates\store\record_detail.html:63
+msgid "Enviar opinión"
+msgstr "Enviar opinión"
+
+#: .\thriller\store\templates\store\record_detail.html:66
+msgid "Debes"
+msgstr "Debes"
+
+#: .\thriller\store\templates\store\record_detail.html:66
+msgid "iniciar sesión"
+msgstr "iniciar sesión"
+
+#: .\thriller\store\templates\store\record_detail.html:66
+msgid "para dejar una opinión."
+msgstr "para dejar una opinión."
+
+#: .\thriller\store\templates\store\record_list.html:6
+msgid "Discos Disponibles"
+msgstr "Discos Disponibles"
+
+#: .\thriller\store\templates\store\record_list.html:9
+msgid "Comparar"
+msgstr "Comparar"
+
+#: .\thriller\store\templates\store\record_list.html:16
+msgid "Buscar discos..."
+msgstr "Buscar discos..."
+
+#: .\thriller\store\templates\store\record_list.html:17
+msgid "Buscar"
+msgstr "Buscar"
+
+#: .\thriller\store\templates\store\record_list.html:21
+msgid "Ordenar por:"
+msgstr "Ordenar por:"
+
+#: .\thriller\store\templates\store\record_list.html:22
+msgid "Título"
+msgstr "Título"
+
+#: .\thriller\store\templates\store\record_list.html:23
+msgid "Artista"
+msgstr "Artista"
+
+#: .\thriller\store\templates\store\record_list.html:24
+msgid "Género"
+msgstr "Género"
+
+#: .\thriller\store\templates\store\record_list.html:25
+msgid "Precio"
+msgstr "Precio"
+
+#: .\thriller\store\templates\store\record_list.html:53
+msgid "No se encontraron discos que coincidan con tu búsqueda."
+msgstr "No se encontraron discos que coincidan con tu búsqueda."
+
+#: .\thriller\store\templates\store\record_list.html:90
+msgid "Por favor selecciona exactamente 2 productos para comparar."
+msgstr "Por favor selecciona exactamente 2 productos para comparar."
+
+#: .\thriller\store\templates\store\records_by_filter.html:5
+msgid "Discos por"
+msgstr "Discos por"
+
+#: .\thriller\store\templates\store\records_by_filter.html:21
+msgid "No se encontraron discos para este"
+msgstr "No se encontraron discos para este"
+
+#: .\thriller\store\templates\store\register.html:5
+#: .\thriller\store\templates\store\register.html:14
+#: .\thriller\thriller\templates\base.html:89
+msgid "Registrarse"
+msgstr "Registrarse"
+
+#: .\thriller\store\templates\store\register.html:11
+msgid "Contraseña:"
+msgstr "Contraseña:"
+
+#: .\thriller\store\templates\store\register.html:12
+msgid "Confirmar contraseña:"
+msgstr "Confirmar contraseña:"
+
+#: .\thriller\thriller\templates\base.html:9
+#: .\thriller\thriller\templates\base.html:111
+msgid "Thriller"
+msgstr "Thriller"
+
+#: .\thriller\thriller\templates\base.html:46
+msgid "Inicio"
+msgstr "Inicio"
+
+#: .\thriller\thriller\templates\base.html:62
+msgid "Perfil"
+msgstr "Perfil"
+
+#: .\thriller\thriller\templates\base.html:68
+msgid "Carrito"
+msgstr "Carrito"
+
+#: .\thriller\thriller\templates\base.html:76
+msgid "Cerrar Sesión"
+msgstr "Cerrar Sesión"
