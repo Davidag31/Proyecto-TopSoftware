@@ -7,8 +7,7 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Instala las dependencias
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
+RUN pip install -r requirements.txt
 
 # Copia el resto de los archivos de la aplicación al contenedor
 COPY . .
