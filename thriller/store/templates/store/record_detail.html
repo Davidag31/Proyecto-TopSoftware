@@ -3,67 +3,81 @@
 
 {% block content %}
 
-    <!-- Detalles del disco -->
-    <h2>{{ record.title }}</h2>
-    <p>{% trans "Autor:" %} <a href="{% url 'records_by_filter' filter_type='artist' filter_value=record.artist %}">{{ record.artist }}</a></p>
-    <p>{% trans "Género:" %} <a href="{% url 'records_by_filter' filter_type='genre' filter_value=record.genre %}">{{ record.genre }}</a></p>
-    <p>{% trans "Precio:" %} ${{ record.price }}</p>
-    <p>{% trans "Stock:" %} {{ record.stock }}</p>
+<!-- Detalles del disco -->
+<h2>{{ record.title }}</h2>
+<p>{% trans "Autor:" %} <a href="{% url 'records_by_filter' filter_type='artist' filter_value=record.artist %}">{{
+        record.artist }}</a></p>
+<p>{% trans "Género:" %} <a href="{% url 'records_by_filter' filter_type='genre' filter_value=record.genre %}">{{
+        record.genre }}</a></p>
+<p>{% trans "Precio:" %} ${{ record.price }}</p>
+<p>{% trans "Stock:" %} {{ record.stock }}</p>
 
-    {% if record.image %}
-        <img src="{{ record.image.url }}" alt="{{ record.title }}" style="width: 200px;">
-    {% endif %}
+{% if record.image %}
+<img src="{{ record.image.url }}" alt="{{ record.title }}" style="width: 200px;">
+{% endif %}
 
-    <!-- Historial de precios -->
-    <h3>{% trans "Historial de Precios" %}</h3>
-    {% if graph %}
-        <img src="{{ graph }}" alt="{% trans "Historial de Precios" %}" />
-    {% else %}
-        <p>{% trans "No hay datos de historial de precios disponibles." %}</p>
-    {% endif %}
+<!-- Demo de la canción -->
+<h3>{% trans "Escucha una muestra:" %}</h3>
+{% if preview_url %}
+<audio controls>
+    <source src="{{ preview_url }}" type="audio/mpeg">
+    {% trans "Tu navegador no soporta el elemento de audio." %}
+</audio>
+{% else %}
+<p>{% trans "No hay una demo disponible para esta canción." %}</p>
+{% endif %}
 
-    <!-- Botón para agregar al carrito -->
-    {% if record.stock > 0 %}
-        <form method="POST" action="{% url 'add_to_cart' record.id %}">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-primary">{% trans "Agregar al carrito" %}</button>
-        </form>
-    {% else %}
-        <p>{% trans "Este disco está agotado." %}</p>
-    {% endif %}
+<!-- Historial de precios -->
+<h3>{% trans "Historial de Precios" %}</h3>
+{% if graph %}
+<img src="{{ graph }}" alt="{% trans " Historial de Precios" %}" />
+{% else %}
+<p>{% trans "No hay datos de historial de precios disponibles." %}</p>
+{% endif %}
 
-    <!-- Botón para editar el disco (solo para staff) -->
-    {% if user.is_staff %}
-        <a href="{% url 'edit_record' record.id %}" class="btn btn-secondary">{% trans "Editar Disco" %}</a>
-    {% endif %}
+<!-- Botón para agregar al carrito -->
+{% if record.stock > 0 %}
+<form method="POST" action="{% url 'add_to_cart' record.id %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">{% trans "Agregar al carrito" %}</button>
+</form>
+{% else %}
+<p>{% trans "Este disco está agotado." %}</p>
+{% endif %}
 
-    <!-- Sistema de calificación y opiniones -->
-    <h3>{% trans "Calificación promedio:" %} {{ record.average_rating }} / 5</h3>
+<!-- Botón para editar el disco (solo para staff) -->
+{% if user.is_staff %}
+<a href="{% url 'edit_record' record.id %}" class="btn btn-secondary">{% trans "Editar Disco" %}</a>
+{% endif %}
 
-    <h4>{% trans "Opiniones de los clientes" %}</h4>
-    <div>
-        {% for review in reviews %}
-        <div class="review">
-            <p><strong>{{ review.user.username }}:</strong></p>
-            <p>{% trans "Calificación:" %} {{ review.rating }} / 5</p>
-            <p>{{ review.comment }}</p>
-            <p><small>{% trans "Publicado el" %} {{ review.created_at }}</small></p>
-        </div>
-        {% empty %}
-        <p>{% trans "No hay opiniones todavía. Sé el primero en opinar." %}</p>
-        {% endfor %}
+<!-- Sistema de calificación y opiniones -->
+<h3>{% trans "Calificación promedio:" %} {{ record.average_rating }} / 5</h3>
+
+<h4>{% trans "Opiniones de los clientes" %}</h4>
+<div>
+    {% for review in reviews %}
+    <div class="review">
+        <p><strong>{{ review.user.username }}:</strong></p>
+        <p>{% trans "Calificación:" %} {{ review.rating }} / 5</p>
+        <p>{{ review.comment }}</p>
+        <p><small>{% trans "Publicado el" %} {{ review.created_at }}</small></p>
     </div>
+    {% empty %}
+    <p>{% trans "No hay opiniones todavía. Sé el primero en opinar." %}</p>
+    {% endfor %}
+</div>
 
-    <!-- Formulario para dejar una opinión (solo si el usuario está autenticado) -->
-    <h4>{% trans "Dejar una opinión" %}</h4>
-    {% if user.is_authenticated %}
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">{% trans "Enviar opinión" %}</button>
-        </form>
-    {% else %}
-        <p>{% trans "Debes" %} <a href="{% url 'login' %}">{% trans "iniciar sesión" %}</a> {% trans "para dejar una opinión." %}</p>
-    {% endif %}
+<!-- Formulario para dejar una opinión (solo si el usuario está autenticado) -->
+<h4>{% trans "Dejar una opinión" %}</h4>
+{% if user.is_authenticated %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">{% trans "Enviar opinión" %}</button>
+</form>
+{% else %}
+<p>{% trans "Debes" %} <a href="{% url 'login' %}">{% trans "iniciar sesión" %}</a> {% trans "para dejar una opinión."
+    %}</p>
+{% endif %}
 
 {% endblock %}

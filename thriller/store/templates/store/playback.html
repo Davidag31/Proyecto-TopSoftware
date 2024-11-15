@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles del Álbum</title>
+</head>
+
+<body>
+    <h1>{{ album.name }}</h1>
+    <p>Artista: {{ album.artist }}</p>
+
+    {% if preview_url %}
+    <h3>Escucha una muestra:</h3>
+    <audio controls>
+        <source src="{{ preview_url }}" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    {% else %}
+    <p>No hay una demo disponible para esta canción.</p>
+    {% endif %}
+</body>
+
+</html>

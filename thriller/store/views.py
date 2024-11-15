@@ -1,14 +1,23 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse
-from .models import Record, ShoppingCart, CartItem, Order, UserProfile, PriceHistory, Review 
+from .models import (
+    Record,
+    ShoppingCart,
+    CartItem,
+    Order,
+    UserProfile,
+    PriceHistory,
+    Review,
+)
 from .forms import RecordForm, CustomUserCreationForm, ReviewForm
 from django.contrib.auth import login
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
 from django.db.models import Q
 import matplotlib
-matplotlib.use('Agg')
+
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import io
 import urllib, base64
@@ -16,41 +25,103 @@ from django.utils.translation import activate
 from django.conf import settings
 from django.utils import translation
 from .payment_processor import CheckPaymentProcessor, AccountBalancePaymentProcessor
+import requests
+from django.http import JsonResponse
+from requests.auth import HTTPBasicAuth
+from .models import Record
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from .serializers import RecordSerializer
+
+
+def get_api_records(request):
+    # Obtén todos los registros
+    records = Record.objects.all()
+
+    # Serializa los datos manualmente
+    # Aquí asumimos que 'Record' tiene campos como 'id', 'title', 'artist', etc.
+    records_data = list(
+        records.values("id", "title", "artist", "price", "stock")
+    )  # Cambia los campos según lo que quieras incluir
+
+    # Devuelve la respuesta en formato JSON
+    return JsonResponse({"records": records_data})
+
+
+def get_spotify_token():
+    auth_url = "https://accounts.spotify.com/api/token"
+    response = requests.post(
+        auth_url,
+        data={"grant_type": "client_credentials"},
+        auth=HTTPBasicAuth(settings.SPOTIFY_CLIENT_ID, settings.SPOTIFY_CLIENT_SECRET),
+    )
+    response_data = response.json()
+    return response_data["access_token"]
+
+
+def get_track_preview_url(track_name):
+    token = get_spotify_token()
+    search_url = "https://api.spotify.com/v1/search"
+    headers = {"Authorization": f"Bearer {token}"}
+    params = {"q": track_name, "type": "track", "limit": 1}
+    response = requests.get(search_url, headers=headers, params=params)
+    results = response.json()
+
+    if results["tracks"]["items"]:
+        return results["tracks"]["items"][0]["preview_url"]
+    return None  # Si no hay preview disponible
+
+
+def album_detail(request, album_id):
+    album = get_object_or_404(Record, id=album_id)
+    preview_url = get_track_preview_url(album.title)
+    return render(
+        request, "store/playback.html", {"album": album, "preview_url": preview_url}
+    )
 
 
 @login_required
 def process_payment(request, method):
     cart = ShoppingCart.objects.get(user=request.user)
-    total_amount = sum(item.record.price * item.quantity for item in cart.cartitem_set.all())
+    total_amount = sum(
+        item.record.price * item.quantity for item in cart.cartitem_set.all()
+    )
 
-    if method == 'check':
+    if method == "check":
         processor = CheckPaymentProcessor()
-    elif method == 'balance':
+    elif method == "balance":
         processor = AccountBalancePaymentProcessor(request.user)
     else:
-        return HttpResponse("Método de pago no soportado.", content_type='text/plain')
+        return HttpResponse("Método de pago no soportado.", content_type="text/plain")
 
     response = processor.process_payment(cart, total_amount)
-    
+
     # Vaciar el carrito después de procesar el pago sin redirigir
     clear_cart(request, redirect_to_cart=False)
 
     return response
 
+
 @login_required
 def checkout(request):
-    return render(request, 'store/checkout.html')
+    return render(request, "store/checkout.html")
+
 
 def set_language(request):
-    user_language = request.GET.get('language', 'es')  # Get the language from the query, default to 'es'
+    user_language = request.GET.get(
+        "language", "es"
+    )  # Get the language from the query, default to 'es'
     translation.activate(user_language)  # Activate the language
-    request.session['language'] = user_language  # Save the language in the session
+    request.session["language"] = user_language  # Save the language in the session
 
     # Get the previous URL and replace the language code in the path
-    previous_url = request.META.get('HTTP_REFERER', '/')
-    new_url = previous_url.replace('/en/', f'/{user_language}/').replace('/es/', f'/{user_language}/')
+    previous_url = request.META.get("HTTP_REFERER", "/")
+    new_url = previous_url.replace("/en/", f"/{user_language}/").replace(
+        "/es/", f"/{user_language}/"
+    )
 
     return redirect(new_url)  # Redirect to the new URL with the updated language code
+
 
 def record_list(request, filter_type=None, filter_value=None):
     records = Record.objects.all()
@@ -119,6 +190,9 @@ def record_detail(request, record_id):
     graph = price_history_graph(record)
     reviews = Review.objects.filter(record=record)
 
+    # Obtener la URL de la demo de Spotify
+    preview_url = get_track_preview_url(record.title)
+
     if request.method == "POST":
         form = ReviewForm(request.POST)
         if form.is_valid():
@@ -127,16 +201,21 @@ def record_detail(request, record_id):
             review.record = record
             review.save()
             record.update_average_rating()
-            return redirect('record_detail', record_id=record.id)
+            return redirect("record_detail", record_id=record.id)
     else:
         form = ReviewForm()
 
-    return render(request, 'store/record_detail.html', {
-        'record': record,
-        'graph': graph,
-        'reviews': reviews,
-        'form': form
-    })
+    return render(
+        request,
+        "store/record_detail.html",
+        {
+            "record": record,
+            "graph": graph,
+            "reviews": reviews,
+            "form": form,
+            "preview_url": preview_url,
+        },
+    )
 
 
 def search_records(request):
@@ -174,6 +253,7 @@ from django.contrib.auth import login
 from django.contrib import messages
 from .forms import CustomUserCreationForm
 from .models import UserProfile
+
 
 def register(request):
     if request.method == "POST":
@@ -258,22 +338,22 @@ def add_to_cart(request, product_id):
         cart_item.quantity += 1
     cart_item.save()
 
-    return redirect('cart_view')
+    return redirect("cart_view")
 
 
 def cart_view(request):
-    cart, created = ShoppingCart.objects.get_or_create(user=request.user)  
-    return render(request, 'store/cart.html', {'cart': cart})
+    cart, created = ShoppingCart.objects.get_or_create(user=request.user)
+    return render(request, "store/cart.html", {"cart": cart})
 
 
 def clear_cart(request, redirect_to_cart=True):
     cart = ShoppingCart.objects.get(user=request.user)
     cart.cartitem_set.all().delete()
     if redirect_to_cart:
-        return redirect('cart_view')
+        return redirect("cart_view")
+
 
 def remove_from_cart(request, item_id):
     cart_item = get_object_or_404(CartItem, id=item_id)
-    cart_item.delete()  
-    return redirect('cart_view')
-
+    cart_item.delete()
+    return redirect("cart_view")
