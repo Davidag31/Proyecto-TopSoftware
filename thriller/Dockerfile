@@ -1,5 +1,5 @@
-# Usa una imagen base oficial de Python
-FROM python:3.10-slim
+# Usa una imagen base más completa
+FROM python:3.10-buster
 
 # Instalar dependencias del sistema necesarias para mysqlclient
 RUN apt-get update && apt-get install -y \
