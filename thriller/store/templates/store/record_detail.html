@@ -46,9 +46,9 @@
 {% endif %}
 
 <!-- Botón para editar el disco (solo para staff) -->
-{% if user.is_staff %}
+
 <a href="{% url 'edit_record' record.id %}" class="btn btn-secondary">{% trans "Editar Disco" %}</a>
-{% endif %}
+
 
 <!-- Sistema de calificación y opiniones -->
 <h3>{% trans "Calificación promedio:" %} {{ record.average_rating }} / 5</h3>

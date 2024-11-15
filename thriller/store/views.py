@@ -29,9 +29,6 @@ import requests
 from django.http import JsonResponse
 from requests.auth import HTTPBasicAuth
 from .models import Record
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
-from .serializers import RecordSerializer
 
 
 def get_api_records(request):
@@ -236,7 +233,6 @@ def profile_view(request):
 
 
 @login_required
-@user_passes_test(lambda u: u.is_staff)
 def create_record(request):
     if request.method == "POST":
         form = RecordForm(request.POST, request.FILES)
@@ -279,7 +275,6 @@ def new_price_history(record):
 
 
 @login_required
-@user_passes_test(lambda u: u.is_staff)
 def edit_record(request, record_id):
     record = get_object_or_404(Record, id=record_id)
 

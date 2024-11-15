@@ -26,12 +26,17 @@ SECRET_KEY = "django-insecure-ia*j8$b852mg-lb@8*yjzm()2v9wvi4g_940@k1ag=^_e91v4g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["*"]
+PORT = os.environ.get("PORT", 8080)
 SPOTIFY_CLIENT_ID = "8dc16ed93cac42689ee20162be125ab9"
 SPOTIFY_CLIENT_SECRET = "9049aa0dbde74c5c9eda8a0e4444e2ad"
 SPOTIFY_REDIRECT_URI = "http://127.0.0.1:8000/"
 
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://django-app-933439352565.us-central1.run.app",  # Dominio de tu aplicación en Cloud Run
+    "http://django-app-933439352565.us-central1.run.app",  # En caso de que estés usando HTTP para pruebas
+]
 # Application definition
 
 INSTALLED_APPS = [

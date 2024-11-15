@@ -3,6 +3,7 @@
 
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="en">
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
@@ -15,108 +16,125 @@
     <script class="u-script" type="text/javascript" src="{% static 'js/jquery-1.9.1.min.js' %}" defer=""></script>
     <script class="u-script" type="text/javascript" src="{% static 'js/nicepage.js' %}" defer=""></script>
     <meta name="generator" content="Nicepage 6.18.4, nicepage.com">
-    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    <link id="u-theme-google-font" rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
 </head>
 
 <body data-path-to-root="./" data-include-products="false" class="u-body u-xl-mode" data-lang="en">
 
-<header class="u-clearfix u-custom-color-3 u-header u-header" id="sec-9439">
-    <div class="u-clearfix u-sheet u-sheet-1">
+    <header class="u-clearfix u-custom-color-3 u-header u-header" id="sec-9439">
+        <div class="u-clearfix u-sheet u-sheet-1">
 
-        <a href="#" class="u-image u-logo u-image-1" data-image-width="372" data-image-height="321">
-            <img src="{% static 'images/_276893D7-3387-426E-A9CB-2FDFBCFDAE57_-removebg-preview.png' %}" class="u-logo-image u-logo-image-1">
-        </a>
-<!-- base.html -->
- 
+            <a href="#" class="u-image u-logo u-image-1" data-image-width="372" data-image-height="321">
+                <img src="{% static 'images/_276893D7-3387-426E-A9CB-2FDFBCFDAE57_-removebg-preview.png' %}"
+                    class="u-logo-image u-logo-image-1">
+            </a>
+            <!-- base.html -->
+
             <a href="{% url 'set_language' %}?language=en">English</a>
             <a href="{% url 'set_language' %}?language=es">Español</a>
 
-        <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1" data-responsive-from="MD">
-            <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px; font-weight: 700; text-transform: uppercase;">
-                <a class="u-button-style u-custom-active-border-color u-custom-active-color u-custom-border u-custom-border-color u-custom-borders u-custom-hover-border-color u-custom-hover-color u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-active-color u-custom-text-color u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#">
-                    <svg class="u-svg-link" viewBox="0 0 24 24"><use xlink:href="#menu-hamburger"></use></svg>
-                    <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                        <g>
-                            <rect y="1" width="16" height="2"></rect>
-                            <rect y="7" width="16" height="2"></rect>
-                            <rect y="13" width="16" height="2"></rect>
-                        </g>
-                    </svg>
-                </a>
-            </div>
+            <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1" data-responsive-from="MD">
+                <div class="menu-collapse"
+                    style="font-size: 1rem; letter-spacing: 0px; font-weight: 700; text-transform: uppercase;">
+                    <a class="u-button-style u-custom-active-border-color u-custom-active-color u-custom-border u-custom-border-color u-custom-borders u-custom-hover-border-color u-custom-hover-color u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-active-color u-custom-text-color u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                        href="#">
+                        <svg class="u-svg-link" viewBox="0 0 24 24">
+                            <use xlink:href="#menu-hamburger"></use>
+                        </svg>
+                        <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+                            <g>
+                                <rect y="1" width="16" height="2"></rect>
+                                <rect y="7" width="16" height="2"></rect>
+                                <rect y="13" width="16" height="2"></rect>
+                            </g>
+                        </svg>
+                    </a>
+                </div>
 
-            <div class="u-custom-menu u-nav-container">
-                <ul class="u-nav u-spacing-30 u-unstyled u-nav-1">
-                    <li class="u-nav-item">
-                        <a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-grey-90 u-text-white" href="{% url 'record_list' %}" style="padding: 10px 0px;">
-                            {% trans "Inicio" %}
-                        </a>
-                    </li>
-
-                    {% if user.is_authenticated %}
-                        {% if user.is_staff %}
-                            
-                            <li class="u-nav-item">
-                                <a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-grey-90 u-text-white" href="{% url 'create_record' %}" style="padding: 10px 0px;">
-                                    {% trans "Crear Disco" %}
-                                </a>
-                            </li>
-                        {% endif %}
-                        
+                <div class="u-custom-menu u-nav-container">
+                    <ul class="u-nav u-spacing-30 u-unstyled u-nav-1">
                         <li class="u-nav-item">
-                            <a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-grey-90 u-text-white" href="{% url 'profile' %}" style="padding: 10px 0px;">
+                            <a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-grey-90 u-text-white"
+                                href="{% url 'record_list' %}" style="padding: 10px 0px;">
+                                {% trans "Inicio" %}
+                            </a>
+                        </li>
+
+                        {% if user.is_authenticated %}
+
+
+                        <li class="u-nav-item">
+                            <a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-grey-90 u-text-white"
+                                href="{% url 'create_record' %}" style="padding: 10px 0px;">
+                                {% trans "Crear Disco" %}
+                            </a>
+                        </li>
+
+
+                        <li class="u-nav-item">
+                            <a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-grey-90 u-text-white"
+                                href="{% url 'profile' %}" style="padding: 10px 0px;">
                                 {% trans "Perfil" %}
                             </a>
                         </li>
 
                         <li class="u-nav-item">
-                            <a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-grey-90 u-text-white" href="{% url 'cart_view' %}" style="padding: 10px 0px;">
-                                {% trans "Carrito" %} <span></span> 
+                            <a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-grey-90 u-text-white"
+                                href="{% url 'cart_view' %}" style="padding: 10px 0px;">
+                                {% trans "Carrito" %} <span></span>
                             </a>
                         </li>
 
                         <li class="u-nav-item">
                             <form id="logout-form" action="{% url 'logout' %}" method="POST" style="display: inline;">
                                 {% csrf_token %}
-                                <button type="submit" class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-grey-90 u-text-white" style="background: none; border: none; padding: 10px 0px;">
+                                <button type="submit"
+                                    class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-grey-90 u-text-white"
+                                    style="background: none; border: none; padding: 10px 0px;">
                                     {% trans "Cerrar Sesión" %}
                                 </button>
                             </form>
                         </li>
-                    {% else %}
-                        
+                        {% else %}
+
                         <li class="u-nav-item">
-                            <a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-grey-90 u-text-white" href="{% url 'login' %}" style="padding: 10px 0px;">
+                            <a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-grey-90 u-text-white"
+                                href="{% url 'login' %}" style="padding: 10px 0px;">
                                 {% trans "Iniciar Sesión" %}
                             </a>
                         </li>
                         <li class="u-nav-item">
-                            <a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-grey-90 u-text-white" href="{% url 'register' %}" style="padding: 10px 0px;">
+                            <a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-grey-90 u-text-white"
+                                href="{% url 'register' %}" style="padding: 10px 0px;">
                                 {% trans "Registrarse" %}
                             </a>
                         </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </nav>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
 
-        
-        <a href="#" class="u-image u-logo u-image-2" data-image-width="861" data-image-height="290">
-            <img src="{% static 'images/_E7B85B56-4297-4CDA-8BC2-4DDFC2024960_-removebg-preview.png' %}" class="u-logo-image u-logo-image-2">
-        </a>
-    </div>
-</header>
 
-<main style="margin-top: 0; padding-top: 0;">
-    {% block content %}
-    {% endblock %}
-</main>
+            <a href="#" class="u-image u-logo u-image-2" data-image-width="861" data-image-height="290">
+                <img src="{% static 'images/_E7B85B56-4297-4CDA-8BC2-4DDFC2024960_-removebg-preview.png' %}"
+                    class="u-logo-image u-logo-image-2">
+            </a>
+        </div>
+    </header>
 
-<footer class="u-align-center u-clearfix u-container-align-center u-custom-color-3 u-footer u-footer" id="sec-c8c9">
-    <div class="u-clearfix u-sheet u-sheet-1">
-        <p class="u-small-text u-text u-text-variant u-text-1"> © 2024 {% trans "Thriller" %}.</p>
-    </div>
-</footer>
+    <main style="margin-top: 0; padding-top: 0;">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="u-align-center u-clearfix u-container-align-center u-custom-color-3 u-footer u-footer" id="sec-c8c9">
+        <div class="u-clearfix u-sheet u-sheet-1">
+            <p class="u-small-text u-text u-text-variant u-text-1"> © 2024 {% trans "Thriller" %}.</p>
+        </div>
+    </footer>
 
 </body>
+
 </html>

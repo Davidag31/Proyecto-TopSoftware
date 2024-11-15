@@ -1,0 +1,21 @@
+# Archivos de Python que no deben ser copiados
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos de configuración de git y VSCode
+.git
+.vscode
+
+# Archivos temporales
+*.log
+*.sqlite3
+
+# Entornos virtuales
+venv/
+env/
+
+# Archivos de desarrollo
+*.md
+*.rst
