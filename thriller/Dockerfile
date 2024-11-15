@@ -1,10 +1,11 @@
-# Usa una imagen base más completa
-FROM python:3.10-buster
+# Usa una imagen base oficial de Python
+FROM python:3.10-slim
 
-# Instalar dependencias del sistema necesarias para mysqlclient
+# Instalar dependencias del sistema necesarias para mysqlclient (ahora usando MariaDB)
 RUN apt-get update && apt-get install -y \
     pkg-config \
-    libmysqlclient-dev \
+    libmariadb-dev-compat \
+    libmariadb-dev \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
